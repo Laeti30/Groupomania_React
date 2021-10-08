@@ -226,6 +226,10 @@ section {
   padding: 1rem 2rem;
   border-radius: 0.25rem;
 }
+.form h2 {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
 .form input {
   background: white;
   border-color: transparent;
@@ -235,7 +239,7 @@ section {
 .form-control {
   display: flex;
   flex-direction: column;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   align-items: center;
 }
 .form button {
@@ -243,12 +247,21 @@ section {
   background: var(--clr-primary);
   color: white;
   border-color: transparent;
-  margin-top: 1rem;
+  margin-top: 2rem;
   letter-spacing: var(--spacing);
   padding: 0.15rem 0.25rem;
   text-transform: capitalize;
   border-radius: var(--radius);
   cursor: pointer;
+}
+.form p {
+  margin-top: 2rem;
+}
+.signupLink {
+  text-decoration: underline;
+  margin-left: 0.5rem;
+  color: var(--clr-primary);
+  font-weight: 500;
 }
 
 /*************** Button *****************/
