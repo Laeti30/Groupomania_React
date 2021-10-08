@@ -137,7 +137,6 @@ table {
   /* secondary/main color */
   --clr-secondary: hsl(0, 100%, 92%);
   /*others*/
-  --transition: all 0.3s linear;
   --spacing: 0.1rem;
   --radius: 0.25rem;
 }
@@ -262,6 +261,14 @@ section {
   margin-left: 0.5rem;
   color: var(--clr-primary);
   font-weight: 500;
+}
+.errorMsg {
+  background-color: red;
+  color: white;
+  font-weight: 500;
+  border-radius: var(--radius);
+  letter-spacing: var(--spacing);
+  opacity: 0;
 }
 
 /*************** Button *****************/

@@ -1,8 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../images/icon-left-font-cut.jpg'
 import { Link } from 'react-router-dom'
 
 const Signup = () => {
+  const [lastName, setLastName] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const signupCheck = (e) => {
+    e.preventDefault()
+    const inputCheck = () => {
+      const textRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/i
+      const emailRegex =
+        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+
+      if (
+        textRegex.test(lastName) &&
+        textRegex.test(firstName) &&
+        emailRegex.test(email)
+      ) {
+        console.log('Données valides')
+        return true
+      } else {
+        alert('Merci de saisir des données valides')
+        return false
+      }
+    }
+    if (inputCheck()) {
+      console.log('use axios')
+    }
+  }
+
   return (
     <>
       <section className='container'>
@@ -10,23 +39,47 @@ const Signup = () => {
           <img src={logo} alt='logo' className='logo' />
         </Link>
         <article className='form'>
-          <form>
+          <form onSubmit={signupCheck}>
             <h2>Inscription</h2>
             <div className='form-control'>
               <label htmlFor='lastName'>Nom de famille :</label>
-              <input type='text' id='lastName' name='lastName' />
+              <input
+                type='text'
+                id='lastName'
+                name='lastName'
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
             </div>
             <div className='form-control'>
               <label htmlFor='firstName'>Prénom :</label>
-              <input type='text' id='firstName' name='firstName' />
+              <input
+                type='text'
+                id='firstName'
+                name='firstName'
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
             </div>
             <div className='form-control'>
               <label htmlFor='email'>Email :</label>
-              <input type='email' id='email' name='email' />
+              <input
+                type='email'
+                id='email'
+                name='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className='form-control'>
               <label htmlFor='password'>Mot de passe :</label>
-              <input type='password' id='password' name='password' />
+              <input
+                type='password'
+                id='password'
+                name='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <button type='submit' className='btn'>
               S'inscrire
