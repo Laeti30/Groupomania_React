@@ -262,6 +262,12 @@ section {
   color: var(--clr-primary);
   font-weight: 500;
 }
+.advice {
+  color: grey;
+  font-size: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .errorMsg {
   background-color: red;
   color: white;
@@ -269,6 +275,19 @@ section {
   border-radius: var(--radius);
   letter-spacing: var(--spacing);
   opacity: 0;
+}
+#message {
+  color: white;
+  font-weight: 500;
+  border-radius: var(--radius);
+  letter-spacing: var(--spacing);
+  padding: 0.25rem 0.75rem;
+}
+.confirmation {
+  background-color: green;
+}
+.warning {
+  background-color: red;
 }
 
 /*************** Button *****************/

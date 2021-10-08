@@ -1,7 +1,7 @@
-const db = require("../models");
-const User = db.users;
-const bcrypt = require("bcrypt");
-const emailValidator = require("email-validator");
+const db = require('../models')
+const User = db.users
+const bcrypt = require('bcrypt')
+const emailValidator = require('email-validator')
 const jwt = require('jsonwebtoken')
 
 // Register a new user
@@ -24,7 +24,7 @@ exports.signup = (req, res, next) => {
       })
       .catch((error) => res.status(500).json({ error }))
   } else {
-    res.status(400).json({ message: 'Merci de saisir un email valide' }) 
+    res.status(400).json({ message: 'Merci de saisir un email valide' })
   }
 }
 
@@ -44,11 +44,17 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
-            token: jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {expiresIn: '24h'}),
+            token: jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
+              expiresIn: '24h',
+            }),
             // token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {expiresIn: '24h'}),
           })
         })
-        .catch((error) => res.status(500).json({ message: "Message numéro 1" + error }))
+        .catch((error) =>
+          res.status(500).json({ message: 'Message numéro 1' + error })
+        )
     })
-    .catch((error) => res.status(500).json({ message: "Message numéro 1" + error }))
+    .catch((error) =>
+      res.status(500).json({ message: 'Message numéro 1' + error })
+    )
 }

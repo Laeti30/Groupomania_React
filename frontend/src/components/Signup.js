@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import logo from '../images/icon-left-font-cut.jpg'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const Signup = () => {
   const [lastName, setLastName] = useState('')
@@ -20,7 +21,6 @@ const Signup = () => {
         textRegex.test(firstName) &&
         emailRegex.test(email)
       ) {
-        console.log('Données valides')
         return true
       } else {
         alert('Merci de saisir des données valides')
@@ -28,7 +28,36 @@ const Signup = () => {
       }
     }
     if (inputCheck()) {
-      console.log('use axios')
+      axios({
+        method: 'post',
+        url: 'http://localhost:5050/users/signup',
+        data: {
+          lastName,
+          firstName,
+          email,
+          password,
+        },
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.status === 201) {
+            document.getElementById('message').classList.add('confirmation')
+            document.getElementById('message').innerText =
+              'Votre compte utilisateur a bien été créé !'
+            setLastName('')
+            setFirstName('')
+            setEmail('')
+            setPassword('')
+          } else {
+            console.log('il y a une erreur')
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          document.getElementById('message').classList.add('warning')
+          document.getElementById('message').innerText =
+            'Une erreur est survenue.  Merci de réessayer plus tard.'
+        })
     }
   }
 
@@ -80,10 +109,15 @@ const Signup = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <span className='advice'>
+                Min 8 caractères dont au moins un chiffre, une majuscule, une
+                minuscule
+              </span>
             </div>
             <button type='submit' className='btn'>
               S'inscrire
             </button>
+            <p id='message'></p>
           </form>
           <p>
             Vous avez déjà un compte ?
