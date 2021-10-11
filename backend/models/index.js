@@ -19,6 +19,12 @@ const db = {}
 db.Sequelize = Sequelize
 db.sequelize = sequelize
 
+// Tables
 db.users = require('./userModel.js')(sequelize, Sequelize)
+db.posts = require('./postModel.js')(sequelize, Sequelize)
+
+// Associations des tables User & Post
+db.users.hasMany(db.posts)
+db.posts.belongsTo(db.users)
 
 module.exports = db

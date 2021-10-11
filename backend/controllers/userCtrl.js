@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const emailValidator = require('email-validator')
 const jwt = require('jsonwebtoken')
 
-// Register a new user
+// CRéation d'un nouvel utilisateur
 exports.signup = (req, res, next) => {
   if (emailValidator.validate(req.body.email)) {
     bcrypt
@@ -14,12 +14,14 @@ exports.signup = (req, res, next) => {
           lastName: req.body.lastName,
           firstName: req.body.firstName,
           email: req.body.email,
-          // Get the hashed password
+          // Récupération du password crypté
           password: hash,
         }
-        // Save this new user in database
+        // Sauevagrde du nouvel utilisateur en bdd
         User.create(user)
-          .then(() => res.status(201).json({ message: 'User created' }))
+          .then(() =>
+            res.status(201).json({ message: 'Nouvel utilisateur créé' })
+          )
           .catch((error) => res.status(400).json({ error }))
       })
       .catch((error) => res.status(500).json({ error }))
@@ -29,32 +31,27 @@ exports.signup = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
-  // Get the user with unique email
-  User.findOne({ email: req.body.email })
+  // Récupération du user avec son email
+  User.findOne({ where: { email: req.body.email } })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ message: 'User not found' })
+        return res.status(401).json({ message: 'Utilisateur non trouvé' })
       }
-      // Check password
+      // Vérification password
       bcrypt
         .compare(req.body.password, user.password)
         .then((valid) => {
           if (!valid) {
-            return res.status(401).json({ message: 'Wrong password' })
+            return res.status(401).json({ message: 'Mot de passe invalide' })
           }
           res.status(200).json({
-            userId: user._id,
-            token: jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
+            userId: user.userId,
+            token: jwt.sign({ userId: user.userId }, process.env.SECRET_KEY, {
               expiresIn: '24h',
             }),
-            // token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {expiresIn: '24h'}),
           })
         })
-        .catch((error) =>
-          res.status(500).json({ message: 'Message numéro 1' + error })
-        )
+        .catch((error) => res.status(500).json({ error }))
     })
-    .catch((error) =>
-      res.status(500).json({ message: 'Message numéro 1' + error })
-    )
+    .catch((error) => res.status(500).json({ error }))
 }

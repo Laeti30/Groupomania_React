@@ -149,7 +149,12 @@ body {
   line-height: 1.5;
   font-size: 0.875rem;
 }
-
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
 h1,
 h2,
 h3,
@@ -223,7 +228,7 @@ section {
   margin: 0 auto;
   margin-bottom: 4rem;
   padding: 1rem 2rem;
-  border-radius: 0.25rem;
+  border-radius: var(--radius);
 }
 .form h2 {
   margin-top: 1rem;
@@ -309,4 +314,62 @@ section {
 }
 .btn:hover {
   background: var(--clr-primary-lighter);
+}
+
+/************** NavBar ***************/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  margin: 20px auto;
+  width: 95%;
+}
+.logo_header {
+  width: 400px;
+}
+nav {
+  width: 30%;
+  margin-right: 20px;
+}
+ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+/************** Dashboard ***************/
+.dashboard {
+  width: 80%;
+  background-color: var(--clr-secondary);
+  margin: 0 auto;
+  border-radius: var(--radius);
+  text-align: center;
+  padding-bottom: 10px;
+}
+.postInputBox {
+  width: 80%;
+  margin: 0 auto 30px;
+}
+.postInputBox input {
+  width: 30%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  height: 1.5rem;
+}
+.postList {
+  width: 80%;
+  margin: 0 auto 30px;
+  border-radius: var(--radius);
+}
+.postList h3 {
+  text-align: left;
+}
+.postCard {
+  background-color: white;
+  border-radius: var(--radius);
+  text-align: left;
+  padding: 1rem;
+}
+.postCard h4 {
+  font-weight: bold;
 }

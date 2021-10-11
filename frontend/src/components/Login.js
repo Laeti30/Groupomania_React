@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import logo from '../images/icon-left-font-cut.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const history = useHistory()
 
   const emailRegex =
     /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
@@ -29,7 +31,43 @@ const Login = () => {
       setEmail('')
       setPassword('')
     } else {
-      console.log('mail valide')
+      axios({
+        method: 'post',
+        url: 'http://localhost:5050/users/login',
+        data: {
+          email,
+          password,
+        },
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.status === 200) {
+            console.log('vous êtes logué')
+            history.push('/dashboard')
+            // } else if (res.status === 401) {
+            //   console.log('Mauvais mot de passe')
+          } else {
+            console.log('Impossible de vous connecter')
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          document.querySelector('.errorMsg').innerText =
+            'Impossible de vous connecter'
+          document
+            .querySelector('.errorMsg')
+            .animate(
+              [
+                { opacity: '0' },
+                { opacity: '1' },
+                { opacity: '1' },
+                { opacity: '0' },
+              ],
+              { duration: 3000 }
+            )
+          setEmail('')
+          setPassword('')
+        })
     }
   }
 
