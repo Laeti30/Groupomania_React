@@ -8,9 +8,11 @@ exports.createPost = (req, res, next) => {
   const post = { ...req.body }
   // console.log(post)
   Post.create(post)
-    .then(() => res.status(201).json({ message: 'Post créé' }))
+    .then(() => res.status(201).json({ message: 'Publication créée' }))
     .catch((error) =>
-      res.status(400).json({ message: 'Impossible de créer le post' + error })
+      res
+        .status(400)
+        .json({ message: 'Impossible de créer la publication' + error })
     )
 }
 
@@ -21,11 +23,32 @@ exports.deletePost = (req, res, next) => {
       res.status(200).json({ message: 'La publication a été supprimée' })
     )
     .catch((error) =>
+      res.status(400).json({
+        message:
+          'Un problème est survenu lors de la suppression du post' + error,
+      })
+    )
+}
+
+// Afficher toutes les publications
+exports.getAllPosts = (req, res, next) => {
+  Post.findAll()
+    .then((posts) => res.status(200).json(posts))
+    .catch((error) =>
       res
         .status(400)
-        .json({
-          message:
-            'Un problème est survenu lors de la suppression du post' + error,
-        })
+        .json({ message: "Impossible d'afficher les publications" + error })
+    )
+}
+
+// Afficher toutes les publications pour un user en particulier
+exports.getPostsFromUser = (req, res, next) => {
+  Post.findAll({ where: { userId: req.params.userId } })
+    .then((posts) => res.status(200).json(posts))
+    .catch((error) =>
+      res.status(400).json({
+        message:
+          "Impossible d'afficher les publications de cet utilisateur" + error,
+      })
     )
 }
