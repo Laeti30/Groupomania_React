@@ -45,8 +45,8 @@ exports.login = (req, res, next) => {
             return res.status(401).json({ message: 'Mot de passe invalide' })
           }
           res.status(200).json({
-            userId: user.userId,
-            token: jwt.sign({ userId: user.userId }, process.env.SECRET_KEY, {
+            userId: user.id,
+            token: jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
               expiresIn: '24h',
             }),
           })
