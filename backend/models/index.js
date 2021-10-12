@@ -22,9 +22,16 @@ db.sequelize = sequelize
 // Tables
 db.users = require('./userModel.js')(sequelize, Sequelize)
 db.posts = require('./postModel.js')(sequelize, Sequelize)
+db.comments = require('./commentModel.js')(sequelize, Sequelize)
 
 // Associations des tables User & Post
 db.users.hasMany(db.posts)
 db.posts.belongsTo(db.users)
+
+// Associations des tables Comment & User ainsi que Comment & Post
+db.users.hasMany(db.comments)
+db.comments.belongsTo(db.users)
+db.posts.hasMany(db.comments)
+db.comments.belongsTo(db.posts)
 
 module.exports = db

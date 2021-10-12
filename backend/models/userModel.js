@@ -1,5 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define('user', {
+    // Clé primaire id généré automatiquement par sequelize
     // userId: {
     //   type: Sequelize.INTEGER,
     //   autoIncrement: true,

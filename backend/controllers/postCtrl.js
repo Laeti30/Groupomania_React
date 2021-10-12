@@ -30,7 +30,7 @@ exports.deletePost = (req, res, next) => {
     )
 }
 
-// Afficher toutes les publications
+// Récupérer toutes les publications
 exports.getAllPosts = (req, res, next) => {
   Post.findAll()
     .then((posts) => res.status(200).json(posts))
@@ -41,7 +41,7 @@ exports.getAllPosts = (req, res, next) => {
     )
 }
 
-// Afficher toutes les publications pour un user en particulier
+// Récupérer toutes les publications pour un user en particulier
 exports.getPostsFromUser = (req, res, next) => {
   Post.findAll({ where: { userId: req.params.userId } })
     .then((posts) => res.status(200).json(posts))

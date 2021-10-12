@@ -1,9 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Comment = sequelize.define('comment', {
-    author: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
+    // Clé primaire id généré automatiquement par sequelize
     content: {
       type: Sequelize.STRING,
       allowNull: false,
