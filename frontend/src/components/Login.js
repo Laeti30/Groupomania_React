@@ -40,12 +40,9 @@ const Login = () => {
         },
       })
         .then((res) => {
-          console.log(res)
           if (res.status === 200) {
-            console.log('vous êtes logué')
+            localStorage.setItem('token', JSON.stringify(res.data.token))
             history.push('/dashboard')
-            // } else if (res.status === 401) {
-            //   console.log('Mauvais mot de passe')
           } else {
             console.log('Impossible de vous connecter')
           }

@@ -360,6 +360,8 @@ ul {
   width: 80%;
   margin: 0 auto 30px;
   border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
 }
 .postList h3 {
   text-align: left;

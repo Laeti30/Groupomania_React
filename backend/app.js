@@ -36,7 +36,12 @@ app.use((req, res, next) => {
 })
 
 // CORS
-app.use(cors())
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+)
 
 // Pour transformer le corps de la requête en objet JavaScript utilisable (remplace bodyParser)
 app.use(express.urlencoded({ extended: true }))
