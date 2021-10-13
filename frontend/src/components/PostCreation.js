@@ -44,21 +44,20 @@ const PostCreation = () => {
       formData.append('imageUrl', file)
       formData.append('userId', userId)
 
-      console.log(formData)
+      // Display the key/value pairs
+      // for (let pair of formData.entries()) {
+      //   console.log(pair[0] + ', ' + pair[1])
+      // }
 
-      axios
-        .post('http://localhost:5050/posts', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: 'Bearer ' + token,
-          },
-        })
-        // axios({
-        //   method: 'post',
-        //   url: 'http://localhost:5050/posts',
-        //   headers: { 'Content-Type': 'multipart/form-data', Authorization: 'Bearer ' + token },
-        //   body: formData,
-        // })
+      axios({
+        method: 'post',
+        url: 'http://localhost:5050/posts',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: 'Bearer ' + token,
+        },
+        data: formData,
+      })
         .then((res) => {
           console.log(res)
           if (res.status === 201) {

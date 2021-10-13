@@ -4,7 +4,7 @@ const postCtrl = require('../controllers/postCtrl')
 const auth = require('../middleware/auth')
 const multer = require('../middleware/multerConfig')
 
-router.post('/', auth, postCtrl.createPost)
+router.post('/', auth, multer, postCtrl.createPost)
 router.delete('/:id', auth, postCtrl.deletePost)
 router.get('/', auth, postCtrl.getAllPosts)
 router.get('/:userId', auth, postCtrl.getPostsFromUser)

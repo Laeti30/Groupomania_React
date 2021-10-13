@@ -6,10 +6,10 @@ const Post = () => {
   const [posts, setPosts] = useState([])
 
   const token = JSON.parse(localStorage.getItem('token'))
-  const tokenParts = token.split('.')
-  const encodedPayload = tokenParts[1]
-  const rawPayload = atob(encodedPayload)
-  const user = JSON.parse(rawPayload)
+  // const tokenParts = token.split('.')
+  // const encodedPayload = tokenParts[1]
+  // const rawPayload = atob(encodedPayload)
+  // const user = JSON.parse(rawPayload)
 
   const getPosts = async () => {
     // const response = await axios({

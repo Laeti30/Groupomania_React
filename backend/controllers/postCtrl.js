@@ -6,7 +6,7 @@ const Post = db.posts
 // exports.createPost = (req, res, next) => {
 //   // const post = { ...req.body, userId: req.body.userId }
 //   const post = { ...req.body }
-//   // console.log(post)
+//   console.log(post)
 //   Post.create(post)
 //     .then(() => res.status(201).json({ message: 'Publication créée' }))
 //     .catch((error) =>
@@ -16,11 +16,16 @@ const Post = db.posts
 //     )
 // }
 exports.createPost = (req, res, next) => {
-  console.log(req.file)
   console.log(req.body)
+  // const post = {
+  //   ...req.body,
+  //   imageUrl: `${req.protocol}://${req.get('host')}/images/${
+  //     req.file.filename
+  //   }`,
+  // }
   const post = req.file
     ? {
-        ...req.body,
+        ...JSON.parse(req.body),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${
           req.file.filename
         }`,
