@@ -41,7 +41,7 @@ const PostCreation = () => {
     if (postChecker()) {
       const formData = new FormData()
       formData.append('content', content)
-      formData.append('imageUrl', file)
+      formData.append('image', file)
       formData.append('userId', userId)
 
       // Display the key/value pairs
