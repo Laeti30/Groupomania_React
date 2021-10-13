@@ -3,10 +3,29 @@ const User = db.users
 const Post = db.posts
 
 // Créer une nouvelle publication
+// exports.createPost = (req, res, next) => {
+//   // const post = { ...req.body, userId: req.body.userId }
+//   const post = { ...req.body }
+//   // console.log(post)
+//   Post.create(post)
+//     .then(() => res.status(201).json({ message: 'Publication créée' }))
+//     .catch((error) =>
+//       res
+//         .status(400)
+//         .json({ message: 'Impossible de créer la publication' + error })
+//     )
+// }
 exports.createPost = (req, res, next) => {
-  // const post = { ...req.body, userId: req.body.userId }
-  const post = { ...req.body }
-  // console.log(post)
+  console.log(req.file)
+  console.log(req.body)
+  const post = req.file
+    ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body }
   Post.create(post)
     .then(() => res.status(201).json({ message: 'Publication créée' }))
     .catch((error) =>

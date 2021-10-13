@@ -7,9 +7,8 @@ module.exports = (sequelize, Sequelize) => {
     //   primaryKey: true,
     //   allowNull: false,
     // },
-    title: {
+    author: {
       type: Sequelize.STRING,
-      allowNull: false,
     },
     content: {
       type: Sequelize.STRING,
@@ -17,6 +16,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     imageUrl: {
       type: Sequelize.STRING,
+      allowNull: true,
     },
   })
 

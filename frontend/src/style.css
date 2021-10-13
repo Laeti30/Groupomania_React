@@ -203,10 +203,10 @@ p {
   }
 }
 
-section {
+/* section {
   width: 90vw;
   margin: 0 auto;
-}
+} */
 
 .container {
   display: flex;
@@ -315,6 +315,19 @@ section {
 .btn:hover {
   background: var(--clr-primary-lighter);
 }
+.btnPublish {
+  display: inline-block;
+  background: var(--clr-primary);
+  color: white;
+  padding: 1.5rem 0.75rem;
+  border-radius: var(--radius);
+  border-color: transparent;
+  text-transform: capitalize;
+  font-size: 1rem;
+  letter-spacing: var(--spacing);
+  cursor: pointer;
+  transition: var(--transition);
+}
 
 /************** NavBar ***************/
 header {
@@ -323,7 +336,7 @@ header {
   align-items: center;
   height: 100px;
   margin: 20px auto;
-  width: 95%;
+  width: 90%;
 }
 .logo_header {
   width: 400px;
@@ -332,14 +345,14 @@ nav {
   width: 30%;
   margin-right: 20px;
 }
-ul {
+nav ul {
   display: flex;
   justify-content: space-around;
 }
 
 /************** Dashboard ***************/
 .dashboard {
-  width: 80%;
+  width: 50%;
   background-color: var(--clr-secondary);
   margin: 0 auto;
   border-radius: var(--radius);
@@ -347,31 +360,49 @@ ul {
   padding-bottom: 10px;
 }
 .postInputBox {
-  width: 80%;
-  margin: 0 auto 30px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
-.postInputBox input {
-  width: 30%;
+#content {
+  width: 40%;
   margin-left: 1rem;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   height: 1.5rem;
 }
-.postList {
+.postContainer {
   width: 80%;
-  margin: 0 auto 30px;
+  margin: 0 auto;
   border-radius: var(--radius);
+}
+.postContainer h3 {
+  text-align: left;
+}
+.postList {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.postList li {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
-}
-.postList h3 {
   text-align: left;
-}
-.postCard {
   background-color: white;
   border-radius: var(--radius);
-  text-align: left;
-  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  margin-bottom: 20px;
 }
-.postCard h4 {
+.postList h4 {
   font-weight: bold;
+}
+.postList img {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  object-fit: cover;
+  border-radius: var(--radius);
 }

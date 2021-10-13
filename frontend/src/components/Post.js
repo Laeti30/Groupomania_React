@@ -4,10 +4,6 @@ import React, { useState, useEffect } from 'react'
 
 const Post = () => {
   const [posts, setPosts] = useState([])
-  // const [postTitle, setPostTitle] = useState('Premier post')
-  // const [postAuthor, setPostAuthor] = useState('Laetitia Dudu')
-  // const [postData, setPostData] = useState("Il fait beau aujourd'hui")
-  // const [postImage, setPostImage] = useState(logo)
 
   const token = JSON.parse(localStorage.getItem('token'))
   const tokenParts = token.split('.')
@@ -16,6 +12,11 @@ const Post = () => {
   const user = JSON.parse(rawPayload)
 
   const getPosts = async () => {
+    // const response = await axios({
+    //   method: 'get',
+    //   url: 'http://localhost:5050/posts',
+    //   headers: { Authorization: 'Bearer ' + token },
+    // })
     const response = await fetch('http://localhost:5050/posts', {
       headers: { Authorization: 'Bearer ' + token },
     })
@@ -30,21 +31,23 @@ const Post = () => {
 
   return (
     <>
-      <article className='postCard'>
-        <ul>
+      <div className='postContainer'>
+        <h3>Dernières publications</h3>
+        <ul className='postList'>
           {posts.map((post) => {
-            const { id, title, content, imageUrl, userId } = post
+            const { id, author, content, imageUrl, createdAt, userId } = post
             return (
               <li key={id}>
-                <h3>{title}</h3>
-                <h4>Publié par {userId}</h4>
+                <h4>
+                  par {userId} le {createdAt}
+                </h4>
                 <p>{content}</p>
                 <img src={imageUrl} alt='' />
               </li>
             )
           })}
         </ul>
-      </article>
+      </div>
     </>
   )
 }

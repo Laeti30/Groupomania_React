@@ -1,7 +1,7 @@
 require('dotenv').config({ path: './config/.env' })
 const express = require('express')
 const cors = require('cors')
-// const bodyParser = require('body-parser')
+const path = require('path')
 
 // Routes
 const userRoutes = require('./routes/userRoutes')
@@ -36,23 +36,18 @@ app.use((req, res, next) => {
 })
 
 // CORS
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  })
-)
+app.use(cors())
 
 // Pour transformer le corps de la requête en objet JavaScript utilisable (remplace bodyParser)
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-// app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(bodyParser.json())
+
+// Comment traiter les requêtes vers le route /image
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 // Routes
 app.use('/users', userRoutes)
 app.use('/posts', postRoutes)
-app.use('/comments', commentRoutes)
-// app.use("/comments", commentRoutes)
+// app.use('/comments', commentRoutes)
 
 module.exports = app
