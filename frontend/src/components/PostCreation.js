@@ -39,20 +39,32 @@ const PostCreation = () => {
     }
 
     if (postChecker()) {
-      axios({
-        method: 'post',
-        url: 'http://localhost:5050/posts',
-        headers: { Authorization: 'Bearer ' + token },
-        data: {
-          content,
-          userId,
-        },
-      })
+      const formData = new FormData()
+      formData.append('content', content)
+      formData.append('imageUrl', file)
+      formData.append('userId', userId)
+
+      console.log(formData)
+
+      axios
+        .post('http://localhost:5050/posts', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        // axios({
+        //   method: 'post',
+        //   url: 'http://localhost:5050/posts',
+        //   headers: { 'Content-Type': 'multipart/form-data', Authorization: 'Bearer ' + token },
+        //   body: formData,
+        // })
         .then((res) => {
           console.log(res)
           if (res.status === 201) {
             console.log('Publication envoyée')
             setContent('')
+            setFile('')
             getPosts()
           } else {
             console.log('il y a une erreur')
@@ -60,6 +72,7 @@ const PostCreation = () => {
         })
         .catch((err) => {
           console.log(err)
+          console.log('il y a une erreur dans le catch')
         })
     }
   }
@@ -80,10 +93,9 @@ const PostCreation = () => {
           id='file'
           name='file'
           accept='image/*'
-          value={file}
           onChange={(e) => setFile(e.target.files[0])}
         />
-        <button type='submit' className='btnPublish'>
+        <button type='submit' className='btnPublish' onClick={handleSubmit}>
           Publier
         </button>
       </form>
