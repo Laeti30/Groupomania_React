@@ -130,12 +130,18 @@ table {
 
 /*************** Variables *****************/
 :root {
+  /* primary/darker */
+  --clr-primary-darker: hsl(10, 99%, 35%);
   /* primary/main color */
   --clr-primary: hsl(10, 99%, 50%);
   /* primary/lighter */
   --clr-primary-lighter: hsl(10, 99%, 65%);
+  /* secondary/darker*/
+  --clr-secondary-darker: hsl(0, 100%, 80%);
   /* secondary/main color */
   --clr-secondary: hsl(0, 100%, 92%);
+  /* secondary/lighter */
+  --clr-secondary-lighter: hsl(0, 100%, 97%);
   /*others*/
   --spacing: 0.1rem;
   --radius: 0.25rem;
@@ -405,8 +411,7 @@ nav li:hover {
   background-color: white;
   border-radius: var(--radius);
   padding-top: 2rem;
-  padding-bottom: 2rem;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 .postList h4 {
   font-weight: bold;
@@ -428,12 +433,24 @@ nav li:hover {
   padding-left: 2rem;
   padding-right: 2rem;
 }
-.trashIcon {
+.trashIcon,
+.heartIcon,
+.commentIcon {
   cursor: pointer;
   transition: var(--transition);
 }
 .trashIcon:hover {
   transform: scale(1.25);
+}
+.postInteract {
+  background-color: var(--clr-primary-lighter);
+  color: var(--clr-secondary-lighter);
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 /************** Profile ***************/

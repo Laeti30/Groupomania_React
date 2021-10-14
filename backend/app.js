@@ -7,7 +7,6 @@ const path = require('path')
 const userRoutes = require('./routes/userRoutes')
 const postRoutes = require('./routes/postRoutes')
 const commentRoutes = require('./routes/commentRoutes')
-// const commentRoutes = require("./routes/commentRoutes")
 
 // Express
 const app = express()
@@ -48,6 +47,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 // Routes
 app.use('/users', userRoutes)
 app.use('/posts', postRoutes)
-// app.use('/comments', commentRoutes)
+app.use('/comments', commentRoutes)
 
 module.exports = app

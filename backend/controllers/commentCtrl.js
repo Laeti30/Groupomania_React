@@ -6,8 +6,6 @@ const Comment = db.comments
 // Créer un commentaire
 exports.createComment = (req, res, next) => {
   const comment = { ...req.body }
-  // const comment = { ...req.body, postId : req.body.postId }
-  // console.log(post)
   Comment.create(comment)
     .then(() => res.status(201).json({ message: 'Commentaire créé' }))
     .catch((error) =>
