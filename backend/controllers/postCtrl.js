@@ -1,6 +1,7 @@
 const db = require('../models')
 const User = db.users
 const Post = db.posts
+const fs = require('fs')
 
 // Créer une publication
 exports.createPost = (req, res, next) => {
@@ -23,15 +24,27 @@ exports.createPost = (req, res, next) => {
 
 // Supprimer une publication
 exports.deletePost = (req, res, next) => {
-  Post.destroy({ where: { id: req.params.id } })
-    .then(() =>
-      res.status(200).json({ message: 'La publication a été supprimée' })
-    )
-    .catch((error) =>
-      res.status(400).json({
-        message:
-          'Un problème est survenu lors de la suppression du post' + error,
+  Post.findOne({ where: { id: req.params.id } })
+    .then((post) => {
+      const filename = post.imageUrl.split('/images/')[1]
+      fs.unlink(`images/${filename}`, () => {
+        Post.destroy({ where: { id: req.params.id } })
+          .then(() =>
+            res.status(200).json({ message: 'La publication a été supprimée' })
+          )
+          .catch((error) =>
+            res.status(400).json({
+              message:
+                'Un problème est survenu lors de la suppression du post' +
+                error,
+            })
+          )
       })
+    })
+    .catch((error) =>
+      res
+        .status(500)
+        .json({ message: 'il y a une erreur dans le catch du findOne' + error })
     )
 }
 

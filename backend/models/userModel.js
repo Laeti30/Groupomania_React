@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
       unique: true,
     },
     password: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.STRING,
       allowNull: false,
     },
     imageUrl: {
@@ -35,6 +35,10 @@ module.exports = (sequelize, Sequelize) => {
     job: {
       type: Sequelize.STRING(50),
       defaultValue: 'Mon poste',
+    },
+    isAdmin: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
     },
   })
 

@@ -32,6 +32,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
   // Récupération du user avec son email
+  console.log(req.body)
   User.findOne({ where: { email: req.body.email } })
     .then((user) => {
       if (!user) {
@@ -61,11 +62,9 @@ exports.getUser = (req, res, next) => {
   User.findOne({ where: { id: req.params.id } })
     .then((user) => res.status(200).json(user))
     .catch((error) =>
-      res
-        .status(400)
-        .json({
-          message:
-            "Impossible de récupérer les données de l'utilisateur " + error,
-        })
+      res.status(400).json({
+        message:
+          "Impossible de récupérer les données de l'utilisateur " + error,
+      })
     )
 }
