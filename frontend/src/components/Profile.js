@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar'
+import { useParams } from 'react-router'
 
 const Profile = () => {
-  const [profile, setProfile] = useState('')
+  const [profile, setProfile] = useState([])
+  const { id } = useParams()
+  const arrayProfile = []
 
   const token = JSON.parse(localStorage.getItem('token'))
   const tokenParts = token.split('.')
   const encodedPayload = tokenParts[1]
   const rawPayload = atob(encodedPayload)
   const tokenUser = JSON.parse(rawPayload)
-  const id = tokenUser.userId
 
   const getProfile = async () => {
     const response = await fetch(`http://localhost:5050/users/${id}`, {
       headers: { Authorization: 'Bearer ' + token },
     })
     const profile = await response.json()
-    setProfile(profile)
-    console.log(profile)
+    arrayProfile.push(profile)
+    setProfile(arrayProfile)
+    console.log(arrayProfile)
   }
 
   useEffect(() => {
@@ -27,19 +30,18 @@ const Profile = () => {
   return (
     <>
       <NavBar />
-      <section className='dashboard'>
+      <section className='dashboard' id='profile'>
         <h2>Mon profil</h2>
         {profile.map((profil) => {
           const { id, lastName, firstName, imageUrl } = profil
 
           return (
             <li key={id}>
-              <div className='headerPost'>
-                <h4>
-                  {lastName} le {firstName}
-                </h4>
+              <img src={imageUrl} alt='profile picture' />
+              <div className='nameBox'>
+                <p> Nom de famille : {lastName} </p>
+                <p> Prénom: {firstName} </p>
               </div>
-              <img src={imageUrl} alt='{id} + profile picture' />
             </li>
           )
         })}

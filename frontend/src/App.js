@@ -19,7 +19,9 @@ function App() {
         <Route path='/signup'>
           <Subscribe />
         </Route>
-        <Route path='/profile/:id' children={<Profile />}></Route>
+        <Route path='/profile/:id'>
+          <Profile />
+        </Route>
         <Route path='/dashboard'>
           <Dashboard />
         </Route>

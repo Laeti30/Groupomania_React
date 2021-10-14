@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const emailValidator = require('email-validator')
 const jwt = require('jsonwebtoken')
 
-// CRéation d'un nouvel utilisateur
+// Création d'un nouvel utilisateur
 exports.signup = (req, res, next) => {
   if (emailValidator.validate(req.body.email)) {
     bcrypt
@@ -54,4 +54,18 @@ exports.login = (req, res, next) => {
         .catch((error) => res.status(500).json({ error }))
     })
     .catch((error) => res.status(500).json({ error }))
+}
+
+// Récupération d'un user
+exports.getUser = (req, res, next) => {
+  User.findOne({ where: { id: req.params.id } })
+    .then((user) => res.status(200).json(user))
+    .catch((error) =>
+      res
+        .status(400)
+        .json({
+          message:
+            "Impossible de récupérer les données de l'utilisateur " + error,
+        })
+    )
 }

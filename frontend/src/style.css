@@ -149,7 +149,8 @@ body {
   line-height: 1.5;
   font-size: 0.875rem;
 }
-ul {
+ul,
+li {
   list-style-type: none;
 }
 a {
@@ -368,12 +369,13 @@ nav li:hover {
   margin: 0 auto;
   border-radius: var(--radius);
   text-align: center;
-  padding-bottom: 10px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .postInputBox {
   width: 100%;
   margin: 0 auto;
-  padding-top: 2rem;
+  padding-top: 1rem;
   padding-bottom: 2rem;
 }
 #content {
@@ -432,4 +434,21 @@ nav li:hover {
 }
 .trashIcon:hover {
   transform: scale(1.25);
+}
+
+/************** Profile ***************/
+#profile h2 {
+  margin-bottom: 2rem;
+}
+#profile li {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: 1rem auto;
+}
+#profile img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
 }

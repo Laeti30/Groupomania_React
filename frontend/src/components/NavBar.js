@@ -4,6 +4,11 @@ import { Link, useHistory } from 'react-router-dom'
 
 const NavBar = () => {
   const history = useHistory()
+  const token = JSON.parse(localStorage.getItem('token'))
+  const tokenParts = token.split('.')
+  const encodedPayload = tokenParts[1]
+  const rawPayload = atob(encodedPayload)
+  const tokenUser = JSON.parse(rawPayload)
 
   const logout = () => {
     localStorage.removeItem('token')
@@ -21,7 +26,7 @@ const NavBar = () => {
             <Link to='/dashboard'>
               <li>Ma communauté</li>
             </Link>
-            <Link to='/profile/:id'>
+            <Link to={`/profile/${tokenUser.userId}`}>
               <li>Mon profil</li>
             </Link>
             <li onClick={logout}>Déconnexion</li>

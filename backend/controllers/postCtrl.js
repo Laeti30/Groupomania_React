@@ -2,27 +2,8 @@ const db = require('../models')
 const User = db.users
 const Post = db.posts
 
-// Créer une nouvelle publication
-// exports.createPost = (req, res, next) => {
-//   // const post = { ...req.body, userId: req.body.userId }
-//   const post = { ...req.body }
-//   console.log(post)
-//   Post.create(post)
-//     .then(() => res.status(201).json({ message: 'Publication créée' }))
-//     .catch((error) =>
-//       res
-//         .status(400)
-//         .json({ message: 'Impossible de créer la publication' + error })
-//     )
-// }
+// Créer une publication
 exports.createPost = (req, res, next) => {
-  console.log(req.body)
-  // const post = {
-  //   ...req.body,
-  //   imageUrl: `${req.protocol}://${req.get('host')}/images/${
-  //     req.file.filename
-  //   }`,
-  // }
   const post = req.file
     ? {
         ...req.body,
