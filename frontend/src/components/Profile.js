@@ -20,7 +20,6 @@ const Profile = () => {
     const profile = await response.json()
     arrayProfile.push(profile)
     setProfile(arrayProfile)
-    console.log(arrayProfile)
   }
 
   useEffect(() => {
@@ -33,14 +32,15 @@ const Profile = () => {
       <section className='dashboard' id='profile'>
         <h2>Mon profil</h2>
         {profile.map((profil) => {
-          const { id, lastName, firstName, imageUrl } = profil
+          const { id, lastName, firstName, imageUrl, job } = profil
 
           return (
             <li key={id}>
-              <img src={imageUrl} alt='profile picture' />
+              <img src={imageUrl} alt='profile' />
               <div className='nameBox'>
                 <p> Nom de famille : {lastName} </p>
                 <p> Prénom: {firstName} </p>
+                <p> Métier: {job} </p>
               </div>
             </li>
           )
