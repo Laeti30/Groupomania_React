@@ -9,6 +9,9 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([])
   const [content, setContent] = useState('')
   const [file, setFile] = useState('')
+  const [comments, setComments] = useState([])
+  const [comment, setComment] = useState('')
+  const [commentDisplay, setCommentDisplay] = useState(false)
 
   const token = JSON.parse(localStorage.getItem('token'))
   const tokenParts = token.split('.')
@@ -93,7 +96,7 @@ const Dashboard = () => {
             accept='image/*'
             onChange={(e) => setFile(e.target.files[0])}
           />
-          <button type='submit' className='btnPublish' onClick={handleSubmit}>
+          <button type='submit' className='btnPublish'>
             Publier
           </button>
         </form>
@@ -112,6 +115,40 @@ const Dashboard = () => {
                 }).then(() => getPosts())
               }
 
+              const getComments = async (e) => {
+                setCommentDisplay(true)
+              }
+
+              const createComment = (e) => {
+                e.preventDefault()
+                const commentChecker = () => {
+                  const textRegex =
+                    /^[\w'\-,.][^_¡÷¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,500}$/i
+                  if (textRegex.test(comment)) {
+                    return true
+                  } else {
+                    alert('Merci de vérifier le contenu du commentaire')
+                    return false
+                  }
+                }
+
+                if (commentChecker()) {
+                  axios({
+                    method: 'POST',
+                    url: `http://localhost:5050/posts/${id}/comments`,
+                    headers: {
+                      Authorization: 'Bearer ' + token,
+                    },
+                    data: {
+                      content: comment,
+                      postId: id,
+                      userId: userId,
+                    },
+                  })
+                    .then(() => setComment(''))
+                    .catch((error) => console.log(error))
+                }
+              }
               return (
                 <li key={id}>
                   <div className='headerPost'>
@@ -129,9 +166,26 @@ const Dashboard = () => {
                   <p>{content}</p>
                   {imageUrl && <img src={imageUrl} alt='' />}
                   <div className='postInteract'>
-                    <ImBubbles3 size={32} className='heartIcon' />
-                    <HiHeart size={32} className='commentIcon' />
+                    <ImBubbles3
+                      size={28}
+                      className='heartIcon'
+                      onClick={getComments}
+                    />
+                    <HiHeart size={28} className='commentIcon' />
                   </div>
+                  {commentDisplay && (
+                    <form>
+                      <input
+                        type='text'
+                        placeholder='Tapez votre commentaire...'
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                      />
+                      <button type='submit' onClick={createComment}>
+                        Publier
+                      </button>
+                    </form>
+                  )}
                 </li>
               )
             })}

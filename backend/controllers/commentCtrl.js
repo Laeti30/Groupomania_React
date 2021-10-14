@@ -16,23 +16,23 @@ exports.createComment = (req, res, next) => {
 }
 
 // Supprimer un commentaire
-exports.deleteComment = (req, res, next) => {
-  Comment.destroy({ where: { id: req.params.id } })
-    .then(() =>
-      res.status(200).json({ message: 'Le commentaire a été supprimé' })
-    )
-    .catch((error) =>
-      res.status(400).json({
-        message:
-          'Un problème est survenu lors de la suppression du commentaire' +
-          error,
-      })
-    )
-}
+// exports.deleteComment = (req, res, next) => {
+//   Comment.destroy({ where: { id: req.params.id } })
+//     .then(() =>
+//       res.status(200).json({ message: 'Le commentaire a été supprimé' })
+//     )
+//     .catch((error) =>
+//       res.status(400).json({
+//         message:
+//           'Un problème est survenu lors de la suppression du commentaire' +
+//           error,
+//       })
+//     )
+// }
 
 // Récupérer tous les commentaires
 exports.getAllComments = (req, res, next) => {
-  Comment.findAll()
+  Comment.findAll({ where: { postId: req.params.id } })
     .then((comments) => res.status(200).json(comments))
     .catch((error) =>
       res
