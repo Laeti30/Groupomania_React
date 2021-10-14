@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react'
-// import axios from 'axios'
+import { BsFillTrashFill } from 'react-icons/bs'
+import axios from 'axios'
 // import logo from '../images/icon-left-font-cut.jpg'
 
 const Post = () => {
   const [posts, setPosts] = useState([])
 
   const token = JSON.parse(localStorage.getItem('token'))
-  // const tokenParts = token.split('.')
-  // const encodedPayload = tokenParts[1]
-  // const rawPayload = atob(encodedPayload)
-  // const user = JSON.parse(rawPayload)
+  const tokenParts = token.split('.')
+  const encodedPayload = tokenParts[1]
+  const rawPayload = atob(encodedPayload)
+  const tokenUser = JSON.parse(rawPayload)
 
   const getPosts = async () => {
-    // const response = await axios({
-    //   method: 'get',
-    //   url: 'http://localhost:5050/posts',
-    //   headers: { Authorization: 'Bearer ' + token },
-    // })
     const response = await fetch('http://localhost:5050/posts', {
       headers: { Authorization: 'Bearer ' + token },
     })
     const posts = await response.json()
     setPosts(posts)
-    console.log(posts)
   }
 
   useEffect(() => {
@@ -36,13 +31,31 @@ const Post = () => {
         <ul className='postList'>
           {posts.map((post) => {
             const { id, author, content, imageUrl, createdAt, userId } = post
+
+            const deletePost = async (e) => {
+              e.preventDefault()
+              axios({
+                method: 'DELETE',
+                url: `http://localhost:5050/posts/${id}`,
+                headers: { Authorization: 'Bearer ' + token },
+              }).then(() => getPosts())
+            }
+
             return (
               <li key={id}>
-                <h4>
-                  par {userId} le {createdAt}
-                </h4>
+                <div className='headerPost'>
+                  <h4>
+                    par {userId} le {createdAt}
+                  </h4>
+                  {userId === tokenUser.userId && (
+                    <BsFillTrashFill
+                      className='trashIcon'
+                      onClick={deletePost}
+                    />
+                  )}
+                </div>
                 <p>{content}</p>
-                <img src={imageUrl} alt='' />
+                {imageUrl && <img src={imageUrl} alt='' />}
               </li>
             )
           })}

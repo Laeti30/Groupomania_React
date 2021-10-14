@@ -328,6 +328,9 @@ p {
   cursor: pointer;
   transition: var(--transition);
 }
+.btnPublish:hover {
+  background: var(--clr-primary-lighter);
+}
 
 /************** NavBar ***************/
 header {
@@ -348,6 +351,14 @@ nav {
 nav ul {
   display: flex;
   justify-content: space-around;
+}
+nav li {
+  color: var(--clr-primary);
+  font-weight: bold;
+}
+nav li:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 /************** Dashboard ***************/
@@ -393,11 +404,13 @@ nav ul {
   border-radius: var(--radius);
   padding-top: 2rem;
   padding-bottom: 2rem;
-  padding-left: 2rem;
   margin-bottom: 20px;
 }
 .postList h4 {
   font-weight: bold;
+}
+.postList p {
+  padding-left: 2rem;
 }
 .postList img {
   width: 400px;
@@ -405,4 +418,18 @@ nav ul {
   margin: 0 auto;
   object-fit: cover;
   border-radius: var(--radius);
+}
+/************** Post ***************/
+.headerPost {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.trashIcon {
+  cursor: pointer;
+  transition: var(--transition);
+}
+.trashIcon:hover {
+  transform: scale(1.25);
 }

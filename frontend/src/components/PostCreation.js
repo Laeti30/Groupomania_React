@@ -50,7 +50,7 @@ const PostCreation = () => {
       // }
 
       axios({
-        method: 'post',
+        method: 'POST',
         url: 'http://localhost:5050/posts',
         headers: {
           'Content-Type': 'multipart/form-data',

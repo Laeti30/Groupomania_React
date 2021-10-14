@@ -1,8 +1,15 @@
 import React from 'react'
 import logo from '../images/icon-left-font-cut.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const NavBar = () => {
+  const history = useHistory()
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    history.push('/login')
+  }
+
   return (
     <>
       <header>
@@ -17,7 +24,7 @@ const NavBar = () => {
             <Link to='/profile/:id'>
               <li>Mon profil</li>
             </Link>
-            <li>Déconnexion</li>
+            <li onClick={logout}>Déconnexion</li>
           </ul>
         </nav>
       </header>
