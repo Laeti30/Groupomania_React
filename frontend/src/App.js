@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './style.css'
 // pages
 import Login from './components/Login'
-import Subscribe from './components/Signup'
+import Signup from './components/Signup'
 import Profile from './components/Profile'
 import Dashboard from './components/Dashboard'
+import Post from './components/Post'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Login />
         </Route>
         <Route path='/signup'>
-          <Subscribe />
+          <Signup />
         </Route>
         <Route path='/profile/:id'>
           <Profile />
@@ -25,6 +26,7 @@ function App() {
         <Route path='/dashboard'>
           <Dashboard />
         </Route>
+        <Route path='/posts/:id' children={<Post />}></Route>
       </Switch>
     </Router>
   )

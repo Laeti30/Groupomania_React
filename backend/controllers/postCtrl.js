@@ -1,5 +1,5 @@
 const db = require('../models')
-// const User = db.users
+const User = db.users
 const Post = db.posts
 const fs = require('fs')
 
@@ -50,7 +50,7 @@ exports.deletePost = (req, res, next) => {
 
 // Récupérer toutes les publications
 exports.getAllPosts = (req, res, next) => {
-  Post.findAll()
+  Post.findAll({ include: User })
     .then((posts) => res.status(200).json(posts))
     .catch((error) =>
       res
@@ -59,14 +59,25 @@ exports.getAllPosts = (req, res, next) => {
     )
 }
 
-// Récupérer toutes les publications pour un user en particulier
-exports.getPostsFromUser = (req, res, next) => {
-  Post.findAll({ where: { userId: req.params.userId } })
-    .then((posts) => res.status(200).json(posts))
+// Récupérer une seule publication
+exports.getOnePost = (req, res, next) => {
+  Post.findOne({ where: { id: req.params.id }, include: User })
+    .then((post) => res.status(200).json(post))
     .catch((error) =>
-      res.status(400).json({
-        message:
-          "Impossible d'afficher les publications de cet utilisateur" + error,
-      })
+      res
+        .status(400)
+        .json({ message: "Impossible d'afficher la publication" + error })
     )
 }
+
+// Récupérer toutes les publications pour un user en particulier
+// exports.getPostsFromUser = (req, res, next) => {
+//   Post.findAll({ where: { userId: req.params.userId } })
+//     .then((posts) => res.status(200).json(posts))
+//     .catch((error) =>
+//       res.status(400).json({
+//         message:
+//           "Impossible d'afficher les publications de cet utilisateur" + error,
+//       })
+//     )
+// }

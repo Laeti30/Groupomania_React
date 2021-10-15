@@ -241,8 +241,7 @@ p {
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
-.form input {
-  background: white;
+form input {
   border-color: transparent;
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
@@ -407,17 +406,22 @@ nav li:hover {
   height: auto;
   display: flex;
   flex-direction: column;
-  text-align: left;
+  text-align: center;
   background-color: white;
   border-radius: var(--radius);
-  padding-top: 2rem;
+  padding-top: 1rem;
   margin-bottom: 2rem;
+}
+.postList a {
+  color: black;
+  width: 100%;
 }
 .postList h4 {
   font-weight: bold;
 }
 .postList p {
   padding-left: 2rem;
+  text-align: left;
 }
 .postList img {
   width: 400px;
@@ -435,23 +439,92 @@ nav li:hover {
 }
 .trashIcon,
 .heartIcon,
-.commentIcon {
+.commentIcon,
+.sendIcon {
   cursor: pointer;
   transition: var(--transition);
 }
-.trashIcon:hover {
+.trashIcon:hover,
+.heartIcon:hover,
+.commentIcon:hover,
+.sendIcon:hover {
   transform: scale(1.25);
 }
+
 .postInteract {
   background-color: var(--clr-primary-lighter);
   color: var(--clr-secondary-lighter);
-  border-radius: var(--radius);
+  border-radius: 0.25rem 0.25rem 0 0;
   display: flex;
   justify-content: space-around;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   margin-top: 1rem;
+  width: 100%;
 }
+.postInteract form {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+#comment {
+  width: 80%;
+  margin-right: 0.75rem;
+}
+/************** Comment *****************/
+.commentContainer {
+  background-color: var(--clr-primary-lighter);
+  color: var(--clr-secondary-lighter);
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+.commentContainer ul {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.commentContainer li {
+  background-color: var(--clr-primary-lighter);
+  border-bottom: solid var(--clr-secondary);
+  text-align: left;
+}
+.commentContainer h5 {
+  margin-left: 1rem;
+}
+.commentContainer p {
+  font-style: italic;
+}
+/**************** Post Page *******************/
+/* .postContainer {
+  width: 50%;
+  background-color: var(--clr-secondary);
+  margin: 0 auto;
+  border-radius: var(--radius);
+  text-align: center;
+  padding-top: 1rem;
+} */
+/* .postCard {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border-radius: var(--radius);
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+}
+.postCard h4 {
+  font-weight: bold;
+}
+.postCard p {
+  padding-left: 2rem;
+  text-align: left;
+}
+.postCard img {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  object-fit: cover;
+  border-radius: var(--radius);
+} */
 
 /************** Profile ***************/
 #profile h2 {

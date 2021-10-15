@@ -1,6 +1,5 @@
 const db = require('../models')
 const User = db.users
-const Post = db.posts
 const Comment = db.comments
 
 // Créer un commentaire
@@ -12,6 +11,17 @@ exports.createComment = (req, res, next) => {
       res
         .status(400)
         .json({ message: 'Impossible de créer le commentaire' + error })
+    )
+}
+
+// Récupérer tous les commentaires d'un post
+exports.getComments = (req, res) => {
+  Comment.findAll({ where: { postId: req.params.id }, include: User })
+    .then((data) => res.status(201).json({ data }))
+    .catch((error) =>
+      res
+        .status(500)
+        .json({ message: 'Impossible de récupérer les commentaires. ' + error })
     )
 }
 
@@ -29,14 +39,3 @@ exports.createComment = (req, res, next) => {
 //       })
 //     )
 // }
-
-// Récupérer tous les commentaires
-exports.getAllComments = (req, res, next) => {
-  Comment.findAll({ where: { postId: req.params.id } })
-    .then((comments) => res.status(200).json(comments))
-    .catch((error) =>
-      res
-        .status(400)
-        .json({ message: "Impossible d'afficher les commentaires" + error })
-    )
-}

@@ -4,6 +4,8 @@ import { BsFillTrashFill } from 'react-icons/bs'
 import { ImBubbles3 } from 'react-icons/im'
 import { HiHeart } from 'react-icons/hi'
 import axios from 'axios'
+import { FiSend } from 'react-icons/fi'
+// import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([])
@@ -11,7 +13,7 @@ const Dashboard = () => {
   const [file, setFile] = useState('')
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
-  const [commentDisplay, setCommentDisplay] = useState(false)
+  // const [commentDisplay, setCommentDisplay] = useState(false)
 
   const token = JSON.parse(localStorage.getItem('token'))
   const tokenParts = token.split('.')
@@ -104,7 +106,8 @@ const Dashboard = () => {
           <h3>Dernières publications</h3>
           <ul className='postList'>
             {posts.map((post) => {
-              const { id, author, content, imageUrl, createdAt, userId } = post
+              const { id, content, imageUrl, createdAt, userId, user } = post
+              const idPost = post.id
 
               const deletePost = async (e) => {
                 e.preventDefault()
@@ -115,11 +118,7 @@ const Dashboard = () => {
                 }).then(() => getPosts())
               }
 
-              const getComments = async (e) => {
-                setCommentDisplay(true)
-              }
-
-              const createComment = (e) => {
+              const createComment = async (e) => {
                 e.preventDefault()
                 const commentChecker = () => {
                   const textRegex =
@@ -135,29 +134,48 @@ const Dashboard = () => {
                 if (commentChecker()) {
                   axios({
                     method: 'POST',
-                    url: `http://localhost:5050/posts/${id}/comments`,
-                    headers: {
-                      Authorization: 'Bearer ' + token,
-                    },
                     data: {
                       content: comment,
                       postId: id,
                       userId: userId,
                     },
+                    url: `http://localhost:5050/posts/${id}/comment`,
+                    headers: {
+                      Authorization: 'Bearer ' + token,
+                    },
                   })
-                    .then(() => setComment(''))
+                    .then(() => {
+                      setComment('')
+                      getComments()
+                    })
                     .catch((error) => console.log(error))
                 }
               }
+
+              const getComments = async () => {
+                const response = await fetch(
+                  `http://localhost:5050/posts/${id}/comment`,
+                  { headers: { Authorization: 'Bearer ' + token } }
+                )
+                const comments = await response.json()
+                setComments(comments.data)
+              }
+
               return (
                 <li key={id}>
+                  {/* <Link to={`/posts/${id}`}> */}
                   <div className='headerPost'>
                     <h4>
-                      par {userId} le {createdAt}
+                      par{' '}
+                      {user.lastName +
+                        ' ' +
+                        user.firstName +
+                        ' le ' +
+                        createdAt}
                     </h4>
                     {userId === tokenUser.userId && (
                       <BsFillTrashFill
-                        size={24}
+                        size={20}
                         className='trashIcon'
                         onClick={deletePost}
                       />
@@ -166,26 +184,51 @@ const Dashboard = () => {
                   <p>{content}</p>
                   {imageUrl && <img src={imageUrl} alt='' />}
                   <div className='postInteract'>
-                    <ImBubbles3
-                      size={28}
-                      className='heartIcon'
-                      onClick={getComments}
-                    />
-                    <HiHeart size={28} className='commentIcon' />
-                  </div>
-                  {commentDisplay && (
                     <form>
                       <input
                         type='text'
                         placeholder='Tapez votre commentaire...'
+                        id='comment'
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                       />
-                      <button type='submit' onClick={createComment}>
-                        Publier
-                      </button>
+                      <FiSend
+                        className='sendIcon'
+                        size={22}
+                        onClick={createComment}
+                      >
+                        Envoyer
+                      </FiSend>
                     </form>
-                  )}
+                    <ImBubbles3
+                      size={28}
+                      className='commentIcon'
+                      onClick={getComments}
+                    />
+                    <HiHeart size={28} className='heartIcon' />
+                  </div>
+                  {/* </Link> */}
+                  <div className='commentContainer'>
+                    <ul>
+                      {comments.map((commentData) => {
+                        const { id, content, postId, user } = commentData
+
+                        if (idPost === postId) {
+                          return (
+                            <li key={id} className='commentBox'>
+                              <h5>
+                                {user.lastName +
+                                  ' ' +
+                                  user.firstName +
+                                  ' dit :'}
+                              </h5>
+                              <p>{content}</p>
+                            </li>
+                          )
+                        }
+                      })}
+                    </ul>
+                  </div>
                 </li>
               )
             })}
