@@ -210,11 +210,6 @@ p {
   }
 }
 
-/* section {
-  width: 90vw;
-  margin: 0 auto;
-} */
-
 .container {
   display: flex;
   flex-direction: column;
@@ -396,6 +391,8 @@ nav li:hover {
 }
 .postContainer h3 {
   text-align: left;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 .postList {
   display: flex;
@@ -483,48 +480,18 @@ nav li:hover {
 }
 .commentContainer li {
   background-color: var(--clr-primary-lighter);
-  border-bottom: solid var(--clr-secondary);
+  border-top: solid var(--clr-secondary);
   text-align: left;
+  padding: 0;
+  margin: 0;
 }
 .commentContainer h5 {
+  padding-top: 1rem;
   margin-left: 1rem;
 }
 .commentContainer p {
   font-style: italic;
 }
-/**************** Post Page *******************/
-/* .postContainer {
-  width: 50%;
-  background-color: var(--clr-secondary);
-  margin: 0 auto;
-  border-radius: var(--radius);
-  text-align: center;
-  padding-top: 1rem;
-} */
-/* .postCard {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  border-radius: var(--radius);
-  padding-top: 1rem;
-  margin-bottom: 2rem;
-}
-.postCard h4 {
-  font-weight: bold;
-}
-.postCard p {
-  padding-left: 2rem;
-  text-align: left;
-}
-.postCard img {
-  width: 400px;
-  height: 400px;
-  margin: 0 auto;
-  object-fit: cover;
-  border-radius: var(--radius);
-} */
 
 /************** Profile ***************/
 #profile h2 {

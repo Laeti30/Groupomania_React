@@ -5,7 +5,6 @@ import { ImBubbles3 } from 'react-icons/im'
 import { HiHeart } from 'react-icons/hi'
 import axios from 'axios'
 import { FiSend } from 'react-icons/fi'
-// import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([])
@@ -13,7 +12,6 @@ const Dashboard = () => {
   const [file, setFile] = useState('')
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
-  // const [commentDisplay, setCommentDisplay] = useState(false)
 
   const token = JSON.parse(localStorage.getItem('token'))
   const tokenParts = token.split('.')
@@ -139,6 +137,7 @@ const Dashboard = () => {
                       postId: id,
                       userId: userId,
                     },
+                    withCredentiels: true,
                     url: `http://localhost:5050/posts/${id}/comment`,
                     headers: {
                       Authorization: 'Bearer ' + token,
@@ -163,16 +162,8 @@ const Dashboard = () => {
 
               return (
                 <li key={id}>
-                  {/* <Link to={`/posts/${id}`}> */}
                   <div className='headerPost'>
-                    <h4>
-                      par{' '}
-                      {user.lastName +
-                        ' ' +
-                        user.firstName +
-                        ' le ' +
-                        createdAt}
-                    </h4>
+                    <h4>par {user.firstName + ' ' + user.lastName}</h4>
                     {userId === tokenUser.userId && (
                       <BsFillTrashFill
                         size={20}
@@ -189,7 +180,6 @@ const Dashboard = () => {
                         type='text'
                         placeholder='Tapez votre commentaire...'
                         id='comment'
-                        value={comment}
                         onChange={(e) => setComment(e.target.value)}
                       />
                       <FiSend
@@ -207,7 +197,6 @@ const Dashboard = () => {
                     />
                     <HiHeart size={28} className='heartIcon' />
                   </div>
-                  {/* </Link> */}
                   <div className='commentContainer'>
                     <ul>
                       {comments.map((commentData) => {

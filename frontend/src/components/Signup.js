@@ -39,7 +39,6 @@ const Signup = () => {
         },
       })
         .then((res) => {
-          console.log(res)
           if (res.status === 201) {
             document.getElementById('message').classList.add('confirmation')
             document.getElementById('message').innerText =

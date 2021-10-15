@@ -5,7 +5,6 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Profile from './components/Profile'
 import Dashboard from './components/Dashboard'
-import Post from './components/Post'
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
         <Route path='/dashboard'>
           <Dashboard />
         </Route>
-        <Route path='/posts/:id' children={<Post />}></Route>
       </Switch>
     </Router>
   )
