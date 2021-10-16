@@ -485,12 +485,18 @@ nav li:hover {
   padding: 0;
   margin: 0;
 }
-.commentContainer h5 {
-  padding-top: 1rem;
-  margin-left: 1rem;
+.headerComment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
 }
+
 .commentContainer p {
   font-style: italic;
+  margin-bottom: 0.75rem;
 }
 
 /************** Profile ***************/

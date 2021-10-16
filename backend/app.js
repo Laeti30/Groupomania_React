@@ -47,6 +47,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 // Routes
 app.use('/users', userRoutes)
 app.use('/posts', postRoutes)
+app.use('/comments', commentRoutes)
 // app.use('/posts/:postId/comments', commentRoutes)
 
 module.exports = app

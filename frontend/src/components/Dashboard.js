@@ -104,7 +104,7 @@ const Dashboard = () => {
           <h3>Dernières publications</h3>
           <ul className='postList'>
             {posts.map((post) => {
-              const { id, content, imageUrl, createdAt, userId, user } = post
+              const { id, content, imageUrl, createdAt, user } = post
               const idPost = post.id
 
               const deletePost = async (e) => {
@@ -202,15 +202,35 @@ const Dashboard = () => {
                       {comments.map((commentData) => {
                         const { id, content, postId, user } = commentData
 
+                        const deleteComment = async (e) => {
+                          e.preventDefault()
+                          axios({
+                            method: 'DELETE',
+                            url: `http://localhost:5050/comments/${id}`,
+                            headers: {
+                              Authorization: 'Bearer ' + token,
+                            },
+                          }).then(() => getComments())
+                        }
+
                         if (idPost === postId) {
                           return (
                             <li key={id} className='commentBox'>
-                              <h5>
-                                {user.lastName +
-                                  ' ' +
-                                  user.firstName +
-                                  ' dit :'}
-                              </h5>
+                              <div className='headerComment'>
+                                <h5>
+                                  {user.lastName +
+                                    ' ' +
+                                    user.firstName +
+                                    ' dit :'}
+                                </h5>
+                                {user.id === tokenUser.userId && (
+                                  <BsFillTrashFill
+                                    size={20}
+                                    className='trashIcon'
+                                    onClick={deleteComment}
+                                  />
+                                )}
+                              </div>
                               <p>{content}</p>
                             </li>
                           )

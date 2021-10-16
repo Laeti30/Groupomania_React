@@ -3,9 +3,8 @@ const router = express.Router()
 const commentCtrl = require('../controllers/commentCtrl')
 const auth = require('../middleware/auth')
 
-router.post('/', auth, commentCtrl.createComment)
-// router.delete('/:id', auth, commentCtrl.deleteComment)
-router.get('/', auth, commentCtrl.getComments)
+router.delete('/:id', auth, commentCtrl.deleteComment)
+
 // router.get('/:id', auth, commentCtrl.getOneComment)
 
 module.exports = router
