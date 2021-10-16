@@ -24,7 +24,7 @@ const Profile = () => {
 
   useEffect(() => {
     getProfile()
-  }, [])
+  }, [id])
 
   return (
     <>
@@ -35,14 +35,22 @@ const Profile = () => {
           const { id, lastName, firstName, imageUrl, job } = profil
 
           return (
-            <li key={id}>
-              <img src={imageUrl} alt='profile' />
-              <div className='nameBox'>
-                <p> Nom de famille : {lastName} </p>
-                <p> Prénom: {firstName} </p>
-                <p> Métier: {job} </p>
+            <div className='profileContainer' key={id}>
+              <div className='profileData'>
+                <img src={imageUrl} alt='profile' />
+                <div className='nameBox'>
+                  <p> Nom de famille : {lastName} </p>
+                  <p> Prénom: {firstName} </p>
+                  <p> Métier: {job} </p>
+                </div>
               </div>
-            </li>
+              {id === tokenUser.userId && (
+                <div>
+                  <button className='btn'>Modifier mon profil</button>
+                  <button className='btn'>Supprimer mon profil</button>
+                </div>
+              )}
+            </div>
           )
         })}
       </section>

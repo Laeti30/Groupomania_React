@@ -304,7 +304,6 @@ form input {
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius);
   border-color: transparent;
-  text-transform: capitalize;
   font-size: 1rem;
   letter-spacing: var(--spacing);
   margin-top: 2rem;
@@ -520,15 +519,22 @@ nav li:hover {
 #profile h2 {
   margin-bottom: 2rem;
 }
-#profile li {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.profileContainer {
   width: 80%;
   margin: 1rem auto;
 }
-#profile img {
+.profileData {
+  display: flex;
+  justify-content: space-around;
+}
+.profileData img {
   width: 150px;
   height: 150px;
   object-fit: cover;
+}
+.nameBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
 }
