@@ -434,6 +434,12 @@ nav li:hover {
   padding-left: 2rem;
   padding-right: 2rem;
 }
+.headerPost a {
+  cursor: pointer;
+}
+.headerPost a:hover {
+  text-decoration: underline;
+}
 .trashIcon,
 .heartIcon,
 .commentIcon,
@@ -493,10 +499,17 @@ nav li:hover {
   padding-right: 2rem;
   padding-top: 0.5rem;
 }
-
+#profileLink {
+  cursor: pointer;
+  color: white;
+}
+#profileLink:hover {
+  text-decoration: underline;
+}
 .commentContainer p {
   font-style: italic;
   margin-bottom: 0.75rem;
+  padding-left: 3rem;
 }
 
 /************** Profile ***************/

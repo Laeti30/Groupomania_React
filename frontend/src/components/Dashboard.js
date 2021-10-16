@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+
+// Icons
 import { BsFillTrashFill } from 'react-icons/bs'
 import { ImBubbles3 } from 'react-icons/im'
 import { HiHeart } from 'react-icons/hi'
-import axios from 'axios'
 import { FiSend } from 'react-icons/fi'
 
 const Dashboard = () => {
@@ -163,7 +166,13 @@ const Dashboard = () => {
               return (
                 <li key={id}>
                   <div className='headerPost'>
-                    <h4>par {user.firstName + ' ' + user.lastName}</h4>
+                    <h4>
+                      par{' '}
+                      <Link to={`profile/${user.id}`}>
+                        {' '}
+                        {user.firstName + ' ' + user.lastName}{' '}
+                      </Link>
+                    </h4>
                     {userId === tokenUser.userId && (
                       <BsFillTrashFill
                         size={20}
@@ -218,10 +227,13 @@ const Dashboard = () => {
                             <li key={id} className='commentBox'>
                               <div className='headerComment'>
                                 <h5>
-                                  {user.lastName +
-                                    ' ' +
-                                    user.firstName +
-                                    ' dit :'}
+                                  <Link
+                                    to={`profile/${user.id}`}
+                                    id='profileLink'
+                                  >
+                                    {user.lastName + ' ' + user.firstName}
+                                  </Link>{' '}
+                                  dit :
                                 </h5>
                                 {user.id === tokenUser.userId && (
                                   <BsFillTrashFill
