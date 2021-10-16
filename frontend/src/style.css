@@ -440,6 +440,10 @@ nav li:hover {
 .headerPost a:hover {
   text-decoration: underline;
 }
+#creationDate {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
 .trashIcon,
 .heartIcon,
 .commentIcon,

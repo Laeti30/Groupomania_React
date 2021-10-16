@@ -170,8 +170,11 @@ const Dashboard = () => {
                       par{' '}
                       <Link to={`profile/${user.id}`}>
                         {' '}
-                        {user.firstName + ' ' + user.lastName}{' '}
-                      </Link>
+                        {user.firstName + ' ' + user.lastName}
+                      </Link>{' '}
+                      <span id='creationDate'>
+                        {new Date(createdAt).toLocaleDateString('fr-FR')}
+                      </span>
                     </h4>
                     {userId === tokenUser.userId && (
                       <BsFillTrashFill
@@ -209,7 +212,8 @@ const Dashboard = () => {
                   <div className='commentContainer'>
                     <ul>
                       {comments.map((commentData) => {
-                        const { id, content, postId, user } = commentData
+                        const { id, content, postId, createdAt, user } =
+                          commentData
 
                         const deleteComment = async (e) => {
                           e.preventDefault()
@@ -232,7 +236,16 @@ const Dashboard = () => {
                                     id='profileLink'
                                   >
                                     {user.lastName + ' ' + user.firstName}
-                                  </Link>{' '}
+                                  </Link>
+                                  {', '}
+                                  <span id='creationDate'>
+                                    {' '}
+                                    le{' '}
+                                    {new Date(createdAt).toLocaleDateString(
+                                      'fr-FR'
+                                    )}
+                                  </span>
+                                  {', '}
                                   dit :
                                 </h5>
                                 {user.id === tokenUser.userId && (
