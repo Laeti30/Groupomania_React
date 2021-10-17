@@ -3,6 +3,7 @@ const User = db.users
 const bcrypt = require('bcrypt')
 const emailValidator = require('email-validator')
 const jwt = require('jsonwebtoken')
+const fs = require('fs')
 
 // Création d'un nouvel utilisateur
 exports.signup = (req, res, next) => {
@@ -66,5 +67,54 @@ exports.getUser = (req, res, next) => {
         message:
           "Impossible de récupérer les données de l'utilisateur " + error,
       })
+    )
+}
+
+// Modification d'un user
+exports.updateUser = (req, res, next) => {
+  const user = req.file
+    ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body }
+  User.update({ user, where: { id: req.params.id } })
+    .then(() =>
+      res
+        .status(200)
+        .json({ message: 'Les données utilisateurs ont été mises à jour' })
+    )
+    .catch((error) =>
+      res
+        .status(400)
+        .json({ message: 'Impossible de mettre à jour le profil' + error })
+    )
+}
+
+// Suppression d'un utilisateur
+exports.deleteUser = (req, res, next) => {
+  User.findOne({ where: { id: req.params.id } })
+    .then((user) => {
+      const filename = user.imageUrl.split('/images/')[1]
+      fs.unlink(`images/${filename}`, () => {
+        User.destroy({ where: { id: req.params.id } })
+          .then(() =>
+            res.status(200).json({ message: "L'utilisateur'a été supprimé" })
+          )
+          .catch((error) =>
+            res.status(400).json({
+              message:
+                "Un problème est survenu lors de la suppression de l'utilisateur" +
+                error,
+            })
+          )
+      })
+    })
+    .catch((error) =>
+      res
+        .status(500)
+        .json({ message: 'il y a une erreur dans le catch du findOne' + error })
     )
 }

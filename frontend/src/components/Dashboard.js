@@ -63,9 +63,7 @@ const Dashboard = () => {
         data: formData,
       })
         .then((res) => {
-          console.log(res)
           if (res.status === 201) {
-            console.log('Publication envoyée')
             setContent('')
             setFile('')
             getPosts()
@@ -75,7 +73,6 @@ const Dashboard = () => {
         })
         .catch((err) => {
           console.log(err)
-          console.log('il y a une erreur dans le catch')
         })
     }
   }
@@ -176,7 +173,7 @@ const Dashboard = () => {
                         {new Date(createdAt).toLocaleDateString('fr-FR')}
                       </span>
                     </h4>
-                    {userId === tokenUser.userId && (
+                    {user.id === tokenUser.userId && (
                       <BsFillTrashFill
                         size={20}
                         className='trashIcon'

@@ -25,13 +25,13 @@ db.posts = require('./postModel.js')(sequelize, Sequelize)
 db.comments = require('./commentModel.js')(sequelize, Sequelize)
 
 // Associations des tables User & Post
-db.users.hasMany(db.posts)
+db.users.hasMany(db.posts, { onDelete: 'cascade' })
 db.posts.belongsTo(db.users)
 
 // Associations des tables Comment & User ainsi que Comment & Post
-db.users.hasMany(db.comments)
+db.users.hasMany(db.comments, { onDelete: 'cascade' })
 db.comments.belongsTo(db.users)
-db.posts.hasMany(db.comments)
+db.posts.hasMany(db.comments, { onDelete: 'cascade' })
 db.comments.belongsTo(db.posts)
 
 module.exports = db

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
+import axios from 'axios'
 
 const Profile = () => {
   const [profile, setProfile] = useState([])
   const { id } = useParams()
   const arrayProfile = []
+  const history = useHistory()
 
   const token = JSON.parse(localStorage.getItem('token'))
   const tokenParts = token.split('.')
@@ -34,6 +36,15 @@ const Profile = () => {
         {profile.map((profil) => {
           const { id, lastName, firstName, imageUrl, job } = profil
 
+          const deleteUser = async (e) => {
+            e.preventDefault()
+            axios({
+              method: 'DELETE',
+              url: `http://localhost:5050/users/${id}`,
+              headers: { Authorization: 'Bearer ' + token },
+            }).then(() => history.push('/login'))
+          }
+
           return (
             <div className='profileContainer' key={id}>
               <div className='profileData'>
@@ -47,7 +58,9 @@ const Profile = () => {
               {id === tokenUser.userId && (
                 <div>
                   <button className='btn'>Modifier mon profil</button>
-                  <button className='btn'>Supprimer mon profil</button>
+                  <button className='btn' onClick={deleteUser}>
+                    Supprimer mon profil
+                  </button>
                 </div>
               )}
             </div>
