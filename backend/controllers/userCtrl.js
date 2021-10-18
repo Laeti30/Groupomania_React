@@ -48,9 +48,14 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user.id,
-            token: jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
-              expiresIn: '24h',
-            }),
+            isAdmin: user.isAdmin,
+            token: jwt.sign(
+              { userId: user.id, isAdmin: user.isAdmin },
+              process.env.SECRET_KEY,
+              {
+                expiresIn: '24h',
+              }
+            ),
           })
         })
         .catch((error) => res.status(500).json({ error }))
@@ -72,24 +77,16 @@ exports.getUser = (req, res, next) => {
 
 // Modification d'un user
 exports.updateUser = (req, res, next) => {
-  User.findOne({ where: { id: req.params.id } })
-    .then(() => {
-      User.update({ ...req.body }, { where: { id: req.params.id } })
-        .then(() =>
-          res
-            .status(200)
-            .json({ message: 'Les données utilisateurs ont été mises à jour' })
-        )
-        .catch((error) =>
-          res
-            .status(400)
-            .json({ message: 'Impossible de mettre à jour le profil' + error })
-        )
-    })
+  User.update({ ...req.body }, { where: { id: req.params.id } })
+    .then(() =>
+      res
+        .status(200)
+        .json({ message: 'Les données utilisateurs ont été mises à jour' })
+    )
     .catch((error) =>
       res
         .status(400)
-        .json({ message: 'Erreur dans le catch du findOne' + error })
+        .json({ message: 'Impossible de mettre à jour le profil' + error })
     )
 }
 

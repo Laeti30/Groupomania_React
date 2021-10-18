@@ -173,7 +173,7 @@ const Dashboard = () => {
                         {new Date(createdAt).toLocaleDateString('fr-FR')}
                       </span>
                     </h4>
-                    {user.id === tokenUser.userId && (
+                    {(user.id === tokenUser.userId || tokenUser.isAdmin) && (
                       <BsFillTrashFill
                         size={20}
                         className='trashIcon'
@@ -245,7 +245,8 @@ const Dashboard = () => {
                                   {', '}
                                   dit :
                                 </h5>
-                                {user.id === tokenUser.userId && (
+                                {(user.id === tokenUser.userId ||
+                                  tokenUser.isAdmin) && (
                                   <BsFillTrashFill
                                     size={20}
                                     className='trashIcon'

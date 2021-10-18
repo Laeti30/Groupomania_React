@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar'
 import { useParams, useHistory } from 'react-router'
 import axios from 'axios'
-import { MdUpdate } from 'react-icons/md'
-import { FiSend } from 'react-icons/fi'
 
 const Profile = () => {
   const [profile, setProfile] = useState([])
@@ -41,10 +39,9 @@ const Profile = () => {
       <section className='dashboard' id='profile'>
         <h2>Mon profil</h2>
         {profile.map((profil) => {
-          const { id, lastName, firstName, imageUrl, job } = profil
+          const { id, lastName, firstName, imageUrl, job, isAdmin } = profil
           const textRegex =
             /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/i
-
           const deleteUser = async (e) => {
             e.preventDefault()
             if (
@@ -90,7 +87,7 @@ const Profile = () => {
               })
                 .then(() => {
                   setUpdateForm(false)
-                  history.push(`/profile/${id}`)
+                  window.location.reload()
                 })
                 .catch((error) => console.log(error))
             } else {
@@ -152,7 +149,7 @@ const Profile = () => {
                   )}
                 </div>
               </div>
-              {id === tokenUser.userId && (
+              {(id === tokenUser.userId || tokenUser.isAdmin) && (
                 <div>
                   {updateForm ? (
                     <button className='btn' onClick={sendNewData}>
