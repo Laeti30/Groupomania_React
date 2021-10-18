@@ -72,24 +72,24 @@ exports.getUser = (req, res, next) => {
 
 // Modification d'un user
 exports.updateUser = (req, res, next) => {
-  const user = req.file
-    ? {
-        ...req.body,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${
-          req.file.filename
-        }`,
-      }
-    : { ...req.body }
-  User.update({ user, where: { id: req.params.id } })
-    .then(() =>
-      res
-        .status(200)
-        .json({ message: 'Les données utilisateurs ont été mises à jour' })
-    )
+  User.findOne({ where: { id: req.params.id } })
+    .then(() => {
+      User.update({ ...req.body }, { where: { id: req.params.id } })
+        .then(() =>
+          res
+            .status(200)
+            .json({ message: 'Les données utilisateurs ont été mises à jour' })
+        )
+        .catch((error) =>
+          res
+            .status(400)
+            .json({ message: 'Impossible de mettre à jour le profil' + error })
+        )
+    })
     .catch((error) =>
       res
         .status(400)
-        .json({ message: 'Impossible de mettre à jour le profil' + error })
+        .json({ message: 'Erreur dans le catch du findOne' + error })
     )
 }
 

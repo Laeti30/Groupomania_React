@@ -538,3 +538,7 @@ nav li:hover {
   justify-content: center;
   align-items: baseline;
 }
+.nameBox p {
+  margin-bottom: 0rem;
+  margin-top: 1rem;
+}
