@@ -23,6 +23,7 @@ db.sequelize = sequelize
 db.users = require('./userModel.js')(sequelize, Sequelize)
 db.posts = require('./postModel.js')(sequelize, Sequelize)
 db.comments = require('./commentModel.js')(sequelize, Sequelize)
+db.likes = require('./likeModel.js')(sequelize, Sequelize)
 
 // Associations des tables User & Post
 db.users.hasMany(db.posts, { onDelete: 'cascade' })
@@ -33,5 +34,11 @@ db.users.hasMany(db.comments, { onDelete: 'cascade' })
 db.comments.belongsTo(db.users)
 db.posts.hasMany(db.comments, { onDelete: 'cascade' })
 db.comments.belongsTo(db.posts)
+
+// Associations des tables Like & user ainsi que Like & Post
+db.users.hasMany(db.likes, { onDelete: 'cascade' })
+db.likes.belongsTo(db.users)
+db.posts.hasMany(db.likes, { onDelete: 'cascade' })
+db.likes.belongsTo(db.posts)
 
 module.exports = db
