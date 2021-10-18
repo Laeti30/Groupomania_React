@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const Profile = () => {
   const [profile, setProfile] = useState([])
+  const [updateForm, setUpdateForm] = useState(false)
   const { id } = useParams()
   const arrayProfile = []
   const history = useHistory()
@@ -38,11 +39,17 @@ const Profile = () => {
 
           const deleteUser = async (e) => {
             e.preventDefault()
-            axios({
-              method: 'DELETE',
-              url: `http://localhost:5050/users/${id}`,
-              headers: { Authorization: 'Bearer ' + token },
-            }).then(() => history.push('/login'))
+            if (
+              window.confirm('Etes-vous sûr de vouler supprimer votre compte ?')
+            ) {
+              axios({
+                method: 'DELETE',
+                url: `http://localhost:5050/users/${id}`,
+                headers: { Authorization: 'Bearer ' + token },
+              }).then(() => history.push('/login'))
+            } else {
+              return false
+            }
           }
 
           return (
@@ -57,7 +64,9 @@ const Profile = () => {
               </div>
               {id === tokenUser.userId && (
                 <div>
-                  <button className='btn'>Modifier mon profil</button>
+                  <button className='btn' onClick={() => setUpdateForm(true)}>
+                    Modifier mon profil
+                  </button>
                   <button className='btn' onClick={deleteUser}>
                     Supprimer mon profil
                   </button>

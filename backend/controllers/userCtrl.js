@@ -18,7 +18,7 @@ exports.signup = (req, res, next) => {
           // Récupération du password crypté
           password: hash,
         }
-        // Sauevagrde du nouvel utilisateur en bdd
+        // Sauvegarde du nouvel utilisateur en bdd
         User.create(user)
           .then(() =>
             res.status(201).json({ message: 'Nouvel utilisateur créé' })
