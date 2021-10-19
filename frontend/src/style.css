@@ -348,7 +348,6 @@ header {
 }
 nav {
   width: 50%;
-  margin-right: 20px;
 }
 nav ul {
   display: flex;
@@ -361,6 +360,13 @@ nav li {
 nav li:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+.navBarIcons {
+  display: none;
+}
+.colorIcons {
+  color: var(--clr-primary);
+  margin: 0.5rem;
 }
 
 /************** Dashboard ***************/
@@ -568,15 +574,35 @@ nav li:hover {
     width: 80%;
     min-width: 200px;
   }
+  .postInputBox {
+    border-bottom: solid hsl(10, 99%, 65%);
+  }
 }
 
 @media all and (max-width: 550px) {
   header {
     width: 98%;
+    margin: 0 auto;
   }
   .logo {
     width: 90%;
     margin: 0 auto 20px;
+  }
+  nav {
+    width: 30%;
+  }
+  nav ul {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .navBarIcons {
+    display: flex;
+  }
+  .navBarText {
+    display: none;
+  }
+  .postInputBox {
+    width: 100%;
   }
   .btnPublish {
     padding: 0.25rem 0.75rem;

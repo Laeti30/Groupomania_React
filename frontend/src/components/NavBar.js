@@ -1,6 +1,9 @@
 import React from 'react'
 import logo from '../images/icon-left-font-cut.jpg'
 import { Link, useHistory } from 'react-router-dom'
+import { FiLogOut } from 'react-icons/fi'
+import { BsFillPersonFill } from 'react-icons/bs'
+import { RiCommunityLine } from 'react-icons/ri'
 
 const NavBar = () => {
   const history = useHistory()
@@ -24,12 +27,23 @@ const NavBar = () => {
         <nav>
           <ul>
             <Link to='/dashboard'>
-              <li>Communauté</li>
+              <li className='navBarText'>Communauté</li>
+              <li className='navBarIcons'>
+                <RiCommunityLine size={26} className='colorIcons' />
+              </li>
             </Link>
             <Link to={`/profile/${tokenUser.userId}`}>
-              <li>Profil</li>
+              <li className='navBarText'>Profil</li>
+              <li className='navBarIcons'>
+                <BsFillPersonFill size={26} className='colorIcons' />
+              </li>
             </Link>
-            <li onClick={logout}>Déconnexion</li>
+            <li className='navBarText' onClick={logout}>
+              Déconnexion
+            </li>
+            <li className='navBarIcons'>
+              <FiLogOut size={26} className='colorIcons' onClick={logout} />
+            </li>
           </ul>
         </nav>
       </header>
