@@ -24,10 +24,10 @@ const NavBar = () => {
         <nav>
           <ul>
             <Link to='/dashboard'>
-              <li>Ma communauté</li>
+              <li>Communauté</li>
             </Link>
             <Link to={`/profile/${tokenUser.userId}`}>
-              <li>Mon profil</li>
+              <li>Profil</li>
             </Link>
             <li onClick={logout}>Déconnexion</li>
           </ul>

@@ -80,10 +80,7 @@ exports.likePost = (req, res, next) => {
   }).then((response) => {
     if (!response) {
       Like.create({ ...req.body })
-      // .then(() => res.status(200).json({ message: 'Like enregistré' }))
-      // .then(() => console.log('Like envoyé'))
       Post.increment({ like: 1 }, { where: { id: req.body.postId } })
-      // .then(() => res.status(200).json({ message: 'Compteur de likes incrémenté' }))
       res
         .status(200)
         .json({ message: 'Like enregistré et compteur incrémenté' })
@@ -93,34 +90,8 @@ exports.likePost = (req, res, next) => {
           [Op.and]: [{ postId: req.body.postId }, { userId: req.body.userId }],
         },
       })
-      // .then(() => res.status(200).json({ message: 'Like supprimé' }))
-      // .then(() => console.log('Like supprimé'))
       Post.decrement({ like: 1 }, { where: { id: req.body.postId } })
-      // .then(() => res.status(200).json({ message: 'Compteur de like décrémenté' }))
       res.status(200).json({ message: 'Like supprimé et compteur décrémenté' })
     }
   })
 }
-
-// Compter les likes
-exports.countLike = (req, res, next) => {
-  Like.count({ where: { postId: req.params.id } })
-    .then((count) => res.status(200).json(count))
-    .catch((error) =>
-      res
-        .status(400)
-        .json({ message: 'Impossible de compter les likes' + error })
-    )
-}
-
-// Récupérer toutes les publications pour un user en particulier
-// exports.getPostsFromUser = (req, res, next) => {
-//   Post.findAll({ where: { userId: req.params.userId } })
-//     .then((posts) => res.status(200).json(posts))
-//     .catch((error) =>
-//       res.status(400).json({
-//         message:
-//           "Impossible d'afficher les publications de cet utilisateur" + error,
-//       })
-//     )
-// }

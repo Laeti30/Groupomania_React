@@ -172,35 +172,36 @@ h4 {
   margin-bottom: 0.75rem;
 }
 h1 {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 h3 {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
 }
 h4 {
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
-p {
-  margin-bottom: 1.25rem;
+body {
+  font-size: 1rem;
 }
-@media screen and (min-width: 800px) {
+
+@media all and (max-width: 850px) {
   h1 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
   h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   h3 {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
   }
   h4 {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
-  body {
-    font-size: 1rem;
+  p {
+    margin-bottom: 1.25rem;
   }
   h1,
   h2,
@@ -217,12 +218,10 @@ p {
   text-align: center;
   margin-top: 5rem;
 }
-
 .logo {
   width: 500px;
   margin-bottom: 50px;
 }
-
 /*************** Form *****************/
 .form {
   background-color: var(--clr-secondary);
@@ -345,10 +344,10 @@ header {
   width: 90%;
 }
 .logo_header {
-  width: 400px;
+  width: 50%;
 }
 nav {
-  width: 30%;
+  width: 50%;
   margin-right: 20px;
 }
 nav ul {
@@ -366,7 +365,7 @@ nav li:hover {
 
 /************** Dashboard ***************/
 .dashboard {
-  width: 50%;
+  max-width: 950px;
   background-color: var(--clr-secondary);
   margin: 0 auto;
   border-radius: var(--radius);
@@ -376,7 +375,7 @@ nav li:hover {
 }
 .postInputBox {
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
   padding-top: 1rem;
   padding-bottom: 2rem;
 }
@@ -384,6 +383,7 @@ nav li:hover {
   width: 40%;
   margin-left: 1rem;
   margin-right: 1.5rem;
+  margin-bottom: 1rem;
   height: 1.5rem;
 }
 .postContainer {
@@ -411,6 +411,7 @@ nav li:hover {
   padding-top: 1rem;
   margin-bottom: 2rem;
 }
+
 .postList a {
   color: black;
   width: 100%;
@@ -423,12 +424,13 @@ nav li:hover {
   text-align: left;
 }
 .postList img {
-  width: 400px;
+  max-width: 400px;
   height: 400px;
   margin: 0 auto;
   object-fit: cover;
   border-radius: var(--radius);
 }
+
 /************** Post ***************/
 .headerPost {
   display: flex;
@@ -439,6 +441,7 @@ nav li:hover {
 .headerPost a {
   cursor: pointer;
 }
+
 .headerPost a:hover {
   text-decoration: underline;
 }
@@ -459,7 +462,6 @@ nav li:hover {
 .sendIcon:hover {
   transform: scale(1.25);
 }
-
 .postInteract {
   background-color: var(--clr-primary-lighter);
   color: var(--clr-secondary-lighter);
@@ -552,4 +554,53 @@ nav li:hover {
 .nameBox p {
   margin-bottom: 0rem;
   margin-top: 1rem;
+}
+
+/************** MediaScreen ***************/
+@media all and (max-width: 850px) {
+  nav {
+    width: 30%;
+  }
+  nav ul {
+    flex-direction: column;
+  }
+  .logo_header {
+    width: 80%;
+    min-width: 200px;
+  }
+}
+
+@media all and (max-width: 550px) {
+  .logo {
+    width: 90%;
+    margin: 0 auto 20px;
+  }
+  .btnPublish {
+    padding: 0.25rem 0.75rem;
+    margin-top: 1rem;
+  }
+  #content {
+    width: 80%;
+  }
+  .postContainer {
+    width: 100%;
+  }
+  .postList img {
+    width: 300px;
+  }
+  .headerPost {
+    padding-left: 0.75rem;
+  }
+  .headerComment {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .commentContainer p {
+    padding-left: 1.25rem;
+  }
+  .profileData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
