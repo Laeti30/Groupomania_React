@@ -259,8 +259,11 @@ form input {
   border-radius: var(--radius);
   cursor: pointer;
 }
-.form p {
-  margin-top: 2rem;
+.messageBox {
+  margin-top: 3rem;
+}
+.messageBox span {
+  text-decoration: underline;
 }
 .signupLink {
   text-decoration: underline;

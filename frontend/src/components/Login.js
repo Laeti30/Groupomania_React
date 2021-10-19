@@ -102,12 +102,17 @@ const Login = () => {
             </button>
             <p className='errorMsg'></p>
           </form>
-          <p>
-            Vous n'êtes pas encore inscrit ?
-            <Link to='/signup'>
-              <span className='signupLink'>Créer un compte</span>
-            </Link>
-          </p>
+          <div className='messageBox'>
+            <p>
+              Vous n'êtes pas encore inscrit ?
+              <Link to='/signup'>
+                <span className='signupLink'>Créer un compte</span>
+              </Link>
+            </p>
+            <p>
+              Mot de passe oublié ? Contactez <span>admin@groupomania.com</span>
+            </p>
+          </div>
         </article>
       </section>
     </>
