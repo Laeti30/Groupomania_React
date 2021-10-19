@@ -1,7 +1,9 @@
 const db = require('../models')
 const User = db.users
 const Post = db.posts
+const Like = db.likes
 const fs = require('fs')
+const { Op } = require('sequelize')
 
 // Créer une publication
 exports.createPost = (req, res, next) => {
@@ -11,8 +13,9 @@ exports.createPost = (req, res, next) => {
         imageUrl: `${req.protocol}://${req.get('host')}/images/${
           req.file.filename
         }`,
+        like: 0,
       }
-    : { ...req.body }
+    : { ...req.body, like: 0 }
   Post.create(post)
     .then(() => res.status(201).json({ message: 'Publication créée' }))
     .catch((error) =>
@@ -67,6 +70,46 @@ exports.getOnePost = (req, res, next) => {
       res
         .status(400)
         .json({ message: "Impossible d'afficher la publication" + error })
+    )
+}
+
+// Liker une publication
+exports.likePost = (req, res, next) => {
+  Like.findOne({
+    where: { userId: req.body.userId, postId: req.body.postId },
+  }).then((response) => {
+    if (!response) {
+      Like.create({ ...req.body })
+      // .then(() => res.status(200).json({ message: 'Like enregistré' }))
+      // .then(() => console.log('Like envoyé'))
+      Post.increment({ like: 1 }, { where: { id: req.body.postId } })
+      // .then(() => res.status(200).json({ message: 'Compteur de likes incrémenté' }))
+      res
+        .status(200)
+        .json({ message: 'Like enregistré et compteur incrémenté' })
+    } else {
+      Like.destroy({
+        where: {
+          [Op.and]: [{ postId: req.body.postId }, { userId: req.body.userId }],
+        },
+      })
+      // .then(() => res.status(200).json({ message: 'Like supprimé' }))
+      // .then(() => console.log('Like supprimé'))
+      Post.decrement({ like: 1 }, { where: { id: req.body.postId } })
+      // .then(() => res.status(200).json({ message: 'Compteur de like décrémenté' }))
+      res.status(200).json({ message: 'Like supprimé et compteur décrémenté' })
+    }
+  })
+}
+
+// Compter les likes
+exports.countLike = (req, res, next) => {
+  Like.count({ where: { postId: req.params.id } })
+    .then((count) => res.status(200).json(count))
+    .catch((error) =>
+      res
+        .status(400)
+        .json({ message: 'Impossible de compter les likes' + error })
     )
 }
 

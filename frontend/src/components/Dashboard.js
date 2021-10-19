@@ -8,6 +8,7 @@ import { BsFillTrashFill } from 'react-icons/bs'
 import { ImBubbles3 } from 'react-icons/im'
 import { HiHeart } from 'react-icons/hi'
 import { FiSend } from 'react-icons/fi'
+// import { likes } from '../../../backend/models'
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([])
@@ -104,7 +105,7 @@ const Dashboard = () => {
           <h3>Dernières publications</h3>
           <ul className='postList'>
             {posts.map((post) => {
-              const { id, content, imageUrl, createdAt, user } = post
+              const { id, content, imageUrl, createdAt, user, like } = post
               const idPost = post.id
 
               const deletePost = async (e) => {
@@ -114,6 +115,24 @@ const Dashboard = () => {
                   url: `http://localhost:5050/posts/${id}`,
                   headers: { Authorization: 'Bearer ' + token },
                 }).then(() => getPosts())
+              }
+
+              const sendLike = () => {
+                axios({
+                  method: 'POST',
+                  data: {
+                    postId: id,
+                    userId: userId,
+                  },
+                  url: `http://localhost:5050/posts/${id}/like`,
+                  headers: {
+                    Authorization: 'Bearer ' + token,
+                  },
+                })
+                  .then(() => {
+                    getPosts()
+                  })
+                  .catch((error) => console.log(error))
               }
 
               const createComment = async (e) => {
@@ -204,7 +223,14 @@ const Dashboard = () => {
                       className='commentIcon'
                       onClick={getComments}
                     />
-                    <HiHeart size={28} className='heartIcon' />
+                    <div className='likeBox'>
+                      <HiHeart
+                        size={28}
+                        className='heartIcon'
+                        onClick={sendLike}
+                      />
+                      <span>{like}</span>
+                    </div>
                   </div>
                   <div className='commentContainer'>
                     <ul>

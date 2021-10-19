@@ -477,6 +477,14 @@ nav li:hover {
   width: 80%;
   margin-right: 0.75rem;
 }
+.likeBox {
+  display: flex;
+  align-items: center;
+}
+.likeBox span {
+  margin-left: 0.25rem;
+  font-size: 0.75rem;
+}
 /************** Comment *****************/
 .commentContainer {
   background-color: var(--clr-primary-lighter);

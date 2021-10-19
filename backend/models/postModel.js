@@ -15,6 +15,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: true,
     },
+    like: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    },
   })
 
   return Post

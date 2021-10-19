@@ -33,7 +33,6 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
   // Récupération du user avec son email
-  console.log(req.body)
   User.findOne({ where: { email: req.body.email } })
     .then((user) => {
       if (!user) {
@@ -77,7 +76,15 @@ exports.getUser = (req, res, next) => {
 
 // Modification d'un user
 exports.updateUser = (req, res, next) => {
-  User.update({ ...req.body }, { where: { id: req.params.id } })
+  const user = req.file
+    ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body }
+  User.update(user, { where: { id: req.params.id } })
     .then(() =>
       res
         .status(200)

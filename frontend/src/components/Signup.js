@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../images/icon-left-font-cut.jpg'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const Signup = () => {
@@ -8,7 +8,6 @@ const Signup = () => {
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const history = useHistory()
 
   const signupCheck = (e) => {
     e.preventDefault()
@@ -48,7 +47,6 @@ const Signup = () => {
             setFirstName('')
             setEmail('')
             setPassword('')
-            history.push('/login')
           } else {
             console.log('il y a une erreur')
           }
