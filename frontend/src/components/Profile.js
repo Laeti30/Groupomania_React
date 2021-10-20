@@ -87,7 +87,7 @@ const Profile = () => {
               })
                 .then(() => {
                   setUpdateForm(false)
-                  // window.location.reload()
+                  window.location.reload()
                 })
                 .catch((error) => console.log(error))
             } else {
@@ -113,7 +113,10 @@ const Profile = () => {
                   )}
                 </div>
                 <div className='nameBox'>
-                  <p> Nom de famille : {lastName}</p>
+                  <p>
+                    {' '}
+                    Nom de famille : {!updateForm && <span>{lastName}</span>}
+                  </p>
                   {updateForm && (
                     <input
                       type='text'
@@ -123,7 +126,7 @@ const Profile = () => {
                       onChange={(e) => setNewLastName(e.target.value)}
                     />
                   )}
-                  <p> Prénom: {firstName} </p>
+                  <p> Prénom: {!updateForm && <span>{firstName}</span>}</p>
                   {updateForm && (
                     <div>
                       <input
@@ -135,7 +138,7 @@ const Profile = () => {
                       />
                     </div>
                   )}
-                  <p> Métier: {job} </p>
+                  <p> Métier: {!updateForm && <span>{job}</span>}</p>
                   {updateForm && (
                     <div>
                       <input
