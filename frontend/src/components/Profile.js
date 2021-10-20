@@ -39,7 +39,7 @@ const Profile = () => {
       <section className='dashboard' id='profile'>
         <h2>Mon profil</h2>
         {profile.map((profil) => {
-          const { id, lastName, firstName, imageUrl, job, isAdmin } = profil
+          const { id, lastName, firstName, imageUrl, job } = profil
           const textRegex =
             /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/i
           const deleteUser = async (e) => {
