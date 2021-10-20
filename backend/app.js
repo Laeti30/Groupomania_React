@@ -1,7 +1,10 @@
-require('dotenv').config({ path: './config/.env' })
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
+// Sécurité
+require('dotenv').config({ path: './config/.env' })
+const helmet = require('helmet')
+const xssClean = require('xss-clean')
 
 // Routes
 const userRoutes = require('./routes/userRoutes')
@@ -10,6 +13,12 @@ const commentRoutes = require('./routes/commentRoutes')
 
 // Express
 const app = express()
+
+// Sécurise Express en définissant divers en-têtes HTTP
+app.use(helmet())
+
+// Sanitize les user input
+app.use(xssClean())
 
 // Connexion à la bdd - sequelize
 const db = require('./models')

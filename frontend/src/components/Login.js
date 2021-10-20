@@ -9,7 +9,7 @@ const Login = () => {
   const history = useHistory()
 
   const emailRegex =
-    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,30})$/i
 
   const loginCheck = (e) => {
     e.preventDefault()
@@ -32,7 +32,7 @@ const Login = () => {
       setPassword('')
     } else {
       axios({
-        method: 'post',
+        method: 'POST',
         url: 'http://localhost:5050/users/login',
         data: {
           email,

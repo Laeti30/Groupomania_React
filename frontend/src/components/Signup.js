@@ -12,9 +12,10 @@ const Signup = () => {
   const signupCheck = (e) => {
     e.preventDefault()
     const inputCheck = () => {
-      const textRegex = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/i
+      const textRegex =
+        /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,30}$/i
       const emailRegex =
-        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,30})$/i
 
       if (
         textRegex.test(lastName) &&
@@ -29,7 +30,7 @@ const Signup = () => {
     }
     if (inputCheck()) {
       axios({
-        method: 'post',
+        method: 'POST',
         url: 'http://localhost:5050/users/signup',
         data: {
           lastName,
