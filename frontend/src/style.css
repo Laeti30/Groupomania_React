@@ -259,7 +259,8 @@ form input {
   cursor: pointer;
 }
 .messageBox {
-  margin-top: 3rem;
+  margin-top: 2rem;
+  line-height: 2;
 }
 .messageBox span {
   text-decoration: underline;
@@ -290,6 +291,8 @@ form input {
   border-radius: var(--radius);
   letter-spacing: var(--spacing);
   padding: 0.25rem 0.75rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .confirmation {
   background-color: green;
@@ -578,6 +581,10 @@ nav li:hover {
 .nameBox p {
   margin-bottom: 0rem;
   margin-top: 1rem;
+  font-weight: 700;
+}
+.nameBox span {
+  font-weight: 400;
 }
 
 /************** MediaScreen ***************/
