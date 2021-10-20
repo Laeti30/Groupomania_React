@@ -95,3 +95,17 @@ exports.likePost = (req, res, next) => {
     }
   })
 }
+
+// Modifier une publication
+exports.updatePost = (req, res, next) => {
+  console.log(req.body)
+  Post.update({ content: req.body.content }, { where: { id: req.params.id } })
+    .then(() =>
+      res.status(200).json({ message: 'La publication a été mise à jour' })
+    )
+    .catch((error) =>
+      res
+        .status(400)
+        .json({ message: 'Impossible de mettre à jour la publication' + error })
+    )
+}

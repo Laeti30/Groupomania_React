@@ -392,6 +392,19 @@ nav li:hover {
   margin-bottom: 1rem;
   height: 1.5rem;
 }
+.updateContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+#newContent {
+  width: 60%;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  height: 1.5rem;
+}
 .postContainer {
   width: 80%;
   margin: 0 auto;
@@ -456,6 +469,7 @@ nav li:hover {
   font-size: 0.8rem;
 }
 .trashIcon,
+.updateIcon,
 .heartIcon,
 .commentIcon,
 .sendIcon {
@@ -463,10 +477,14 @@ nav li:hover {
   transition: var(--transition);
 }
 .trashIcon:hover,
+.updateIcon:hover,
 .heartIcon:hover,
 .commentIcon:hover,
 .sendIcon:hover {
   transform: scale(1.25);
+}
+.updateIcon {
+  margin-right: 1rem;
 }
 .postInteract {
   background-color: var(--clr-primary-lighter);

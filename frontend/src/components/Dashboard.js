@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom'
 
 // Icons
 import { BsFillTrashFill } from 'react-icons/bs'
-import { ImBubbles3 } from 'react-icons/im'
+import { ImBubbles3, ImPencil } from 'react-icons/im'
 import { HiHeart } from 'react-icons/hi'
 import { FiSend } from 'react-icons/fi'
-// import { likes } from '../../../backend/models'
 
 const Dashboard = () => {
   const [posts, setPosts] = useState([])
@@ -16,6 +15,8 @@ const Dashboard = () => {
   const [file, setFile] = useState('')
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
+  const [updatePostContent, setUpdatePostContent] = useState(false)
+  const [newContent, setNewContent] = useState('')
 
   const token = JSON.parse(localStorage.getItem('token'))
   const tokenParts = token.split('.')
@@ -117,6 +118,28 @@ const Dashboard = () => {
                 }).then(() => getPosts())
               }
 
+              const updatePost = () => {
+                setUpdatePostContent(!updatePostContent)
+                setNewContent(content)
+              }
+
+              const sendNewPost = () => {
+                console.log(newContent)
+                axios({
+                  method: 'PUT',
+                  url: `http://localhost:5050/posts/${id}`,
+                  headers: {
+                    Authorization: 'Bearer ' + token,
+                  },
+                  data: { content: newContent },
+                })
+                  .then(() => {
+                    setUpdatePostContent(false)
+                    getPosts()
+                  })
+                  .catch((error) => console.log(error))
+              }
+
               const sendLike = () => {
                 axios({
                   method: 'POST',
@@ -193,14 +216,37 @@ const Dashboard = () => {
                       </span>
                     </h4>
                     {(user.id === tokenUser.userId || tokenUser.isAdmin) && (
-                      <BsFillTrashFill
-                        size={20}
-                        className='trashIcon'
-                        onClick={deletePost}
-                      />
+                      <div>
+                        <ImPencil
+                          size={20}
+                          className='updateIcon'
+                          onClick={updatePost}
+                        />
+                        <BsFillTrashFill
+                          size={20}
+                          className='trashIcon'
+                          onClick={deletePost}
+                        />
+                      </div>
                     )}
                   </div>
-                  <p>{content}</p>
+                  {!updatePostContent && <p id='postContent'>{content}</p>}
+                  {updatePostContent && (
+                    <div className='updateContent'>
+                      <input
+                        type='textarea'
+                        id='newContent'
+                        name='newContent'
+                        value={newContent}
+                        onChange={(e) => setNewContent(e.target.value)}
+                      />
+                      <FiSend
+                        className='sendIcon'
+                        size={22}
+                        onClick={sendNewPost}
+                      ></FiSend>
+                    </div>
+                  )}
                   {imageUrl && <img src={imageUrl} alt='' />}
                   <div className='postInteract'>
                     <form>

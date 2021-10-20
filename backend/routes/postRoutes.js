@@ -10,7 +10,7 @@ router.delete('/:id', auth, postCtrl.deletePost)
 router.get('/', auth, postCtrl.getAllPosts)
 router.get('/:id', auth, postCtrl.getOnePost)
 router.post('/:id/like', auth, postCtrl.likePost)
-// router.put('/:id', auth, multer, postCtrl.updatePost)
+router.put('/:id', auth, postCtrl.updatePost)
 
 router.post('/:id/comment', auth, commentCtrl.createComment)
 router.get('/:id/comment', auth, commentCtrl.getComments)
