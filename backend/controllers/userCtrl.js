@@ -39,7 +39,7 @@ exports.login = (req, res, next) => {
   User.findOne({ where: { email: encodedEmail } })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ message: 'Utilisateur non trouvé' })
+        return res.status(400).json({ message: 'Utilisateur non trouvé' })
       }
       // Vérification password
       bcrypt

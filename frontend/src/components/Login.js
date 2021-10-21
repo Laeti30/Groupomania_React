@@ -12,10 +12,8 @@ const Login = () => {
     /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,30})$/i
 
   const loginCheck = (e) => {
-    e.preventDefault()
-    if (!emailRegex.test(email)) {
-      document.querySelector('.errorMsg').innerText =
-        'Merci de saisir un email valide'
+    const errorDisplay = (message) => {
+      document.querySelector('.errorMsg').innerText = message
       document
         .querySelector('.errorMsg')
         .animate(
@@ -27,44 +25,75 @@ const Login = () => {
           ],
           { duration: 3000 }
         )
-      // alert('Merci de saisir un email valide')
       setEmail('')
       setPassword('')
+    }
+    e.preventDefault()
+    if (!emailRegex.test(email)) {
+      errorDisplay('Merci de saisir un email valide')
     } else {
-      axios({
+      // Création des options de la requête fetch
+      const loginData = { email, password }
+      const init = {
         method: 'POST',
-        url: 'http://localhost:5050/users/login',
-        data: {
-          email,
-          password,
-        },
-      })
+        body: JSON.stringify(loginData),
+        headers: { 'Content-Type': 'application/json' },
+      }
+      fetch('http://localhost:5050/users/login', init)
         .then((res) => {
           if (res.status === 200) {
-            localStorage.setItem('token', JSON.stringify(res.data.token))
-            history.push('/dashboard')
+            return res.json()
+          } else if (res.status === 400) {
+            errorDisplay('Utilisateur non trouvé')
+          } else if (res.status === 401) {
+            errorDisplay('Mot de passe invalide')
+          } else if (res.status === 429) {
+            errorDisplay(
+              'Vous avez atteint le nombre maximal de tentatives autorisées. Merci de réessayer dans une heure'
+            )
           } else {
-            console.log('Impossible de vous connecter')
+            errorDisplay('Une erreur est survenue')
           }
         })
-        .catch((err) => {
-          console.log(err)
-          document.querySelector('.errorMsg').innerText =
-            'Impossible de vous connecter'
-          document
-            .querySelector('.errorMsg')
-            .animate(
-              [
-                { opacity: '0' },
-                { opacity: '1' },
-                { opacity: '1' },
-                { opacity: '0' },
-              ],
-              { duration: 3000 }
-            )
-          setEmail('')
-          setPassword('')
+        .then((data) => {
+          localStorage.setItem('token', JSON.stringify(data.token))
+          history.push('/dashboard')
         })
+        .catch((error) => console.log(error))
+      // axios({
+      //   method: 'POST',
+      //   url: 'http://localhost:5050/users/login',
+      //   data: {
+      //     email,
+      //     password,
+      //   },
+      // })
+      //   .then((res) => {
+      //     if (res.status === 200) {
+      //       localStorage.setItem('token', JSON.stringify(res.data.token))
+      //       history.push('/dashboard')
+      //     } else {
+      //       console.log('Impossible de vous connecter - else error')
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err)
+      //     document.querySelector('.errorMsg').innerText =
+      //       'Impossible de vous connecter'
+      //     document
+      //       .querySelector('.errorMsg')
+      //       .animate(
+      //         [
+      //           { opacity: '0' },
+      //           { opacity: '1' },
+      //           { opacity: '1' },
+      //           { opacity: '0' },
+      //         ],
+      //         { duration: 3000 }
+      //       )
+      //     setEmail('')
+      //     setPassword('')
+      //   })
     }
   }
 
