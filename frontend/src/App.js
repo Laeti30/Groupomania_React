@@ -5,26 +5,19 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Profile from './components/Profile'
 import Dashboard from './components/Dashboard'
+// Routes
+import PublicRoute from './components/PublicRoute'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path='/'>
-          <Login />
-        </Route>
-        <Route path='/login'>
-          <Login />
-        </Route>
-        <Route path='/signup'>
-          <Signup />
-        </Route>
-        <Route path='/profile/:id'>
-          <Profile />
-        </Route>
-        <Route path='/dashboard'>
-          <Dashboard />
-        </Route>
+        <PublicRoute component={Login} exact path='/' />
+        <PublicRoute component={Login} path='/login' />
+        <PublicRoute component={Signup} path='/signup' />
+        <PrivateRoute component={Profile} path='/profile/:id' />
+        <PrivateRoute component={Dashboard} path='/dashboard' />
       </Switch>
     </Router>
   )

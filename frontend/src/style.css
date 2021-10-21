@@ -167,7 +167,6 @@ h2,
 h3,
 h4 {
   letter-spacing: var(--spacing);
-  text-transform: capitalize;
   line-height: 1.25;
   margin-bottom: 0.75rem;
 }
@@ -176,6 +175,7 @@ h1 {
 }
 h2 {
   font-size: 1.75rem;
+  text-transform: capitalize;
 }
 h3 {
   font-size: 1.25rem;
@@ -186,9 +186,6 @@ h4 {
 body {
   font-size: 1rem;
 }
-/* input {
-  text-transform: capitalize;
-} */
 
 @media all and (max-width: 850px) {
   h1 {
@@ -246,8 +243,7 @@ form input {
 #lastName,
 #firstName,
 #newLastName,
-#newFirstName,
-#newJob {
+#newFirstName {
   text-transform: capitalize;
 }
 .form-control {
@@ -557,6 +553,7 @@ nav li:hover {
 }
 .commentTitle {
   font-size: 1rem;
+  margin-bottom: 0;
 }
 #profileLink {
   cursor: pointer;
