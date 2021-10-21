@@ -243,6 +243,13 @@ form input {
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
 }
+#lastName,
+#firstName,
+#newLastName,
+#newFirstName,
+#newJob {
+  text-transform: capitalize;
+}
 .form-control {
   display: flex;
   flex-direction: column;

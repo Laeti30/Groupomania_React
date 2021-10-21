@@ -2,19 +2,21 @@ const db = require('../models')
 const User = db.users
 const bcrypt = require('bcrypt')
 const emailValidator = require('email-validator')
+const emailScramble = require('email-scramble')
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
 
 // Création d'un nouvel utilisateur
 exports.signup = (req, res, next) => {
   if (emailValidator.validate(req.body.email)) {
+    const encodedEmail = emailScramble.encode(req.body.email)
     bcrypt
       .hash(req.body.password, 10)
       .then((hash) => {
         const user = {
           lastName: req.body.lastName,
           firstName: req.body.firstName,
-          email: req.body.email,
+          email: encodedEmail,
           // Récupération du password crypté
           password: hash,
         }
@@ -32,8 +34,9 @@ exports.signup = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
+  const encodedEmail = emailScramble.encode(req.body.email)
   // Récupération du user avec son email
-  User.findOne({ where: { email: req.body.email } })
+  User.findOne({ where: { email: encodedEmail } })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ message: 'Utilisateur non trouvé' })
