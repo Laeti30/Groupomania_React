@@ -103,7 +103,7 @@ const Dashboard = () => {
           </button>
         </form>
         <div className='postContainer'>
-          <h3>Dernières publications</h3>
+          <h1>Dernières publications</h1>
           <ul className='postList'>
             {posts.map((post) => {
               const { id, content, imageUrl, createdAt, user, like } = post
@@ -205,7 +205,7 @@ const Dashboard = () => {
               return (
                 <li key={id}>
                   <div className='headerPost'>
-                    <h4>
+                    <h2 className='postTitle'>
                       par{' '}
                       <Link to={`profile/${user.id}`}>
                         {' '}
@@ -214,7 +214,7 @@ const Dashboard = () => {
                       <span id='creationDate'>
                         {new Date(createdAt).toLocaleDateString('fr-FR')}
                       </span>
-                    </h4>
+                    </h2>
                     {(user.id === tokenUser.userId || tokenUser.isAdmin) && (
                       <div>
                         <ImPencil
@@ -299,7 +299,7 @@ const Dashboard = () => {
                           return (
                             <li key={id} className='commentBox'>
                               <div className='headerComment'>
-                                <h5>
+                                <h3 className='commentTitle'>
                                   <Link
                                     to={`profile/${user.id}`}
                                     id='profileLink'
@@ -316,7 +316,7 @@ const Dashboard = () => {
                                   </span>
                                   {', '}
                                   dit :
-                                </h5>
+                                </h3>
                                 {(user.id === tokenUser.userId ||
                                   tokenUser.isAdmin) && (
                                   <BsFillTrashFill

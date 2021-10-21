@@ -76,7 +76,7 @@ const Login = () => {
         </Link>
         <article className='form'>
           <form onSubmit={loginCheck}>
-            <h2>Connexion</h2>
+            <h1>Connexion</h1>
             <div className='form-control'>
               <label htmlFor='email'>Email :</label>
               <input

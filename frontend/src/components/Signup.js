@@ -69,7 +69,7 @@ const Signup = () => {
         </Link>
         <article className='form'>
           <form onSubmit={signupCheck}>
-            <h2>Inscription</h2>
+            <h1>Inscription</h1>
             <div className='form-control'>
               <label htmlFor='lastName'>Nom de famille :</label>
               <input

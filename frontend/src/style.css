@@ -172,13 +172,13 @@ h4 {
   margin-bottom: 0.75rem;
 }
 h1 {
-  font-size: 4rem;
-}
-h2 {
   font-size: 2.5rem;
 }
-h3 {
+h2 {
   font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.25rem;
 }
 h4 {
   font-size: 1rem;
@@ -186,16 +186,19 @@ h4 {
 body {
   font-size: 1rem;
 }
+/* input {
+  text-transform: capitalize;
+} */
 
 @media all and (max-width: 850px) {
   h1 {
-    font-size: 3rem;
-  }
-  h2 {
     font-size: 2rem;
   }
-  h3 {
+  h2 {
     font-size: 1.25rem;
+  }
+  h3 {
+    font-size: 1rem;
   }
   h4 {
     font-size: 0.875rem;
@@ -259,7 +262,7 @@ form input {
   cursor: pointer;
 }
 .messageBox {
-  margin-top: 2rem;
+  margin-top: 1rem;
   line-height: 2;
 }
 .messageBox span {
@@ -283,6 +286,7 @@ form input {
   font-weight: 500;
   border-radius: var(--radius);
   letter-spacing: var(--spacing);
+  margin-top: 1rem;
   opacity: 0;
 }
 #message {
@@ -413,9 +417,10 @@ nav li:hover {
   margin: 0 auto;
   border-radius: var(--radius);
 }
-.postContainer h3 {
+.postContainer h1 {
   text-align: left;
   font-weight: bold;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 .postList {
@@ -438,8 +443,9 @@ nav li:hover {
   color: black;
   width: 100%;
 }
-.postList h4 {
+.postTitle {
   font-weight: bold;
+  font-size: 1.125rem;
 }
 .postList p {
   padding-left: 3rem;
@@ -517,7 +523,7 @@ nav li:hover {
   margin-left: 0.25rem;
   font-size: 0.75rem;
 }
-/************** Comment *****************/
+/************** Commentaires *****************/
 .commentContainer {
   background-color: var(--clr-primary-lighter);
   color: var(--clr-secondary-lighter);
@@ -541,6 +547,9 @@ nav li:hover {
   padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 0.5rem;
+}
+.commentTitle {
+  font-size: 1rem;
 }
 #profileLink {
   cursor: pointer;
@@ -640,7 +649,7 @@ nav li:hover {
   .postContainer {
     width: 100%;
   }
-  .postContainer h3 {
+  .postContainer h1 {
     text-align: center;
   }
   .postList img {

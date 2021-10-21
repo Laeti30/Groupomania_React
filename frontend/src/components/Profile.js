@@ -37,7 +37,7 @@ const Profile = () => {
     <>
       <NavBar />
       <section className='dashboard' id='profile'>
-        <h2>Mon profil</h2>
+        <h1>Mon profil</h1>
         {profile.map((profil) => {
           const { id, lastName, firstName, imageUrl, job } = profil
           const textRegex =
