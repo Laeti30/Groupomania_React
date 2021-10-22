@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../images/icon-left-font-cut.jpg'
 import { Link, useHistory } from 'react-router-dom'
-import axios from 'axios'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -32,11 +31,9 @@ const Login = () => {
     if (!emailRegex.test(email)) {
       errorDisplay('Merci de saisir un email valide')
     } else {
-      // Création des options de la requête fetch
-      const loginData = { email, password }
       const init = {
         method: 'POST',
-        body: JSON.stringify(loginData),
+        body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' },
       }
       fetch('http://localhost:5050/users/login', init)
@@ -60,40 +57,6 @@ const Login = () => {
           history.push('/dashboard')
         })
         .catch((error) => console.log(error))
-      // axios({
-      //   method: 'POST',
-      //   url: 'http://localhost:5050/users/login',
-      //   data: {
-      //     email,
-      //     password,
-      //   },
-      // })
-      //   .then((res) => {
-      //     if (res.status === 200) {
-      //       localStorage.setItem('token', JSON.stringify(res.data.token))
-      //       history.push('/dashboard')
-      //     } else {
-      //       console.log('Impossible de vous connecter - else error')
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err)
-      //     document.querySelector('.errorMsg').innerText =
-      //       'Impossible de vous connecter'
-      //     document
-      //       .querySelector('.errorMsg')
-      //       .animate(
-      //         [
-      //           { opacity: '0' },
-      //           { opacity: '1' },
-      //           { opacity: '1' },
-      //           { opacity: '0' },
-      //         ],
-      //         { duration: 3000 }
-      //       )
-      //     setEmail('')
-      //     setPassword('')
-      //   })
     }
   }
 

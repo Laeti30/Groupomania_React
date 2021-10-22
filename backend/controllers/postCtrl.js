@@ -29,8 +29,24 @@ exports.createPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   Post.findOne({ where: { id: req.params.id } })
     .then((post) => {
-      const filename = post.imageUrl.split('/images/')[1]
-      fs.unlink(`images/${filename}`, () => {
+      if (post.imageUrl != null) {
+        const filename = post.imageUrl.split('/images/')[1]
+        fs.unlink(`images/${filename}`, () => {
+          Post.destroy({ where: { id: req.params.id } })
+            .then(() =>
+              res
+                .status(200)
+                .json({ message: 'La publication a été supprimée' })
+            )
+            .catch((error) =>
+              res.status(400).json({
+                message:
+                  'Un problème est survenu lors de la suppression du post' +
+                  error,
+              })
+            )
+        })
+      } else {
         Post.destroy({ where: { id: req.params.id } })
           .then(() =>
             res.status(200).json({ message: 'La publication a été supprimée' })
@@ -42,7 +58,7 @@ exports.deletePost = (req, res, next) => {
                 error,
             })
           )
-      })
+      }
     })
     .catch((error) =>
       res
