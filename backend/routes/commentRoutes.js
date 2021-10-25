@@ -5,6 +5,4 @@ const auth = require('../middleware/auth')
 
 router.delete('/:id', auth, commentCtrl.deleteComment)
 
-// router.get('/:id', auth, commentCtrl.getOneComment)
-
 module.exports = router
