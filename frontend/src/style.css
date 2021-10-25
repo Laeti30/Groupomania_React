@@ -655,6 +655,7 @@ nav li:hover {
   }
   .postContainer h1 {
     text-align: center;
+    font-size: 1.75rem;
   }
   .postList img {
     width: 300px;

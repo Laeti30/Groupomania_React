@@ -56,7 +56,7 @@ const Signup = () => {
           console.log(err)
           document.getElementById('message').classList.add('warning')
           document.getElementById('message').innerText =
-            'Une erreur est survenue.  Merci de réessayer plus tard.'
+            'Une erreur est survenue.'
         })
     }
   }
